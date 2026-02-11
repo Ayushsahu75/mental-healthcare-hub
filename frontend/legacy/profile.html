@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - Mental Wellness Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dashboard-body">
+    <header class="page-header" style="height: 100px;"> 
+        <div class="container">
+            <button class="back-btn" onclick="window.location.href='dashboard.html'">← Back</button>
+            <h1>My Profile</h1>
+            <div class="header-actions">
+                <button class="btn btn-danger" id="logoutBtn">Log Out</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard-main">
+        <div class="container">
+            <div class="dashboard-grid" style="grid-template-columns: 1fr 1fr; max-width: 900px; margin: 0 auto;">
+                
+                <div class="card dashboard-card profile-info-card">
+                    <div class="card-header" style="text-align: center;">
+                        <div id="profileAvatarContainer" class="profile-avatar-container">
+                             <span id="profileAvatarInitial" class="avatar-initial">U</span>
+                        </div>
+                        
+                        <h3 id="profileName">User Name</h3>
+                        <p id="profileEmail" style="font-size: 1rem;"></p>
+                    </div>
+                    
+                    <div class="profile-details-list">
+                        <div class="detail-item">
+                            <strong>Student ID:</strong>
+                            <span id="profileStudentId">Not Set</span>
+                        </div>
+                        <div class="detail-item">
+                            <strong>College/University:</strong>
+                            <span id="profileCollege">Not Set</span>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Sign-in Method:</strong>
+                            <span id="signInMethod">Email/Password</span>
+                        </div>
+                        <div class="detail-item">
+                            <strong>Member Since:</strong>
+                            <span id="memberSince">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card dashboard-card profile-actions-card">
+                    <div class="card-header">
+                        <h3>Account & Security</h3>
+                    </div>
+                    <div class="quick-actions-grid" style="grid-template-columns: 1fr;">
+                        <button class="action-btn" id="updatePasswordBtn">
+                            <div class="action-icon">🔑</div>
+                            <span>Update Password</span>
+                        </button>
+                        <button class="action-btn" id="editProfileBtn">
+                            <div class="action-icon">✍️</div>
+                            <span>Edit Details</span>
+                        </button>
+                        <button class="action-btn" onclick="window.location.href='mood-tracker.html'">
+                            <div class="action-icon">📊</div>
+                            <span>View Mood History</span>
+                        </button>
+                        <button class="action-btn" id="deleteAccountBtn">
+                            <div class="action-icon">🗑️</div>
+                            <span>Delete Account</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="editProfileModal" class="modal">
+        <div class="modal-content" style="max-width: 500px;">
+            <span class="close" onclick="closeEditProfileModal()">&times;</span>
+            <h3>Edit Profile Details</h3>
+            
+            <form id="editProfileForm">
+                <div class="form-group" style="text-align: left;">
+                    <label for="editFullName">Full Name</label>
+                    <input type="text" id="editFullName" name="fullName" required>
+                </div>
+                
+                <div class="form-group" style="text-align: left;">
+                    <label for="editEmail">Email (Read-only)</label>
+                    <input type="email" id="editEmail" name="email" disabled>
+                </div>
+                
+                <div class="form-group" style="text-align: left;">
+                    <label for="editStudentId">Student ID (Optional)</label>
+                    <input type="text" id="editStudentId" name="studentId">
+                </div>
+                
+                <div class="form-group" style="text-align: left;">
+                    <label for="editCollege">College/University</label>
+                    <select id="editCollege" name="college">
+                        <option value="">Select your institution</option>
+                        <option value="university1">University of Technology</option>
+                        <option value="university2">State University</option>
+                        <option value="university3">Private College</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div style="margin-top: 20px; display: flex; justify-content: flex-end; gap: 10px;">
+                    <button type="button" class="btn btn-secondary btn-small" onclick="closeEditProfileModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary btn-small" id="saveProfileBtn">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="firebase-init.js"></script> 
+    <script src="profile.js"></script>
+</body>
+</html>

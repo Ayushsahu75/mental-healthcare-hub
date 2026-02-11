@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood History - Mental Wellness Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Chart.js for visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+</head>
+<body class="mood-tracker-body">
+    <header class="page-header">
+        <div class="container">
+            <button class="back-btn" onclick="window.location.href='mood-tracker.html'">← Mood Tracker</button>
+            <h1>Mood History</h1>
+            <div class="header-actions">
+                <button class="btn btn-secondary" onclick="exportHistory()">Export</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="mood-tracker-main">
+        <div class="container">
+            
+            <section class="booking-section" style="margin-bottom: 2rem;">
+                <div class="section-header">
+                    <h2>Mood Trends Over Time</h2>
+                    <p>See how your emotional wellbeing has evolved.</p>
+                </div>
+                <div class="card dashboard-card" style="padding: 1.5rem;">
+                    <canvas id="moodTrendChart" width="400" height="200"></canvas>
+                </div>
+            </section>
+            
+            <section class="booking-section">
+                <div class="section-header" style="margin-bottom: 1rem;">
+                    <h2>Detailed Entries</h2>
+                    <p id="loadingIndicator">Loading mood entries...</p>
+                </div>
+
+                <div id="moodHistoryList" class="history-list" style="display: flex; flex-direction: column; gap: 1rem;">
+                    <!-- Mood entries will be dynamically inserted here by history.js -->
+                </div>
+                
+                <div id="noHistory" style="text-align: center; color: #64748b; padding: 2rem; display: none;">
+                    No mood entries found. Start tracking your mood on the previous page!
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="dashboard.html" class="nav-item">
+            <div class="nav-icon">🏠</div>
+            <span>Home</span>
+        </a>
+        <a href="chatbot.html" class="nav-item">
+            <div class="nav-icon">💬</div>
+            <span>Chat</span>
+        </a>
+        <a href="mood-tracker.html" class="nav-item active">
+            <div class="nav-icon">📊</div>
+            <span>Track Your Mood</span>
+        </a>
+        <a href="breathing-exercises.html" class="nav-item">
+            <div class="nav-icon">🫁</div>
+            <span>Breath</span>
+        </a>
+        <a href="resources.html" class="nav-item">
+            <div class="nav-icon">🔍</div>
+            <span>Discover</span>
+        </a>
+        <a href="sounds.html" class="nav-item">
+            <div class="nav-icon">🎵</div>
+            <span>Sounds</span>
+        </a>
+    </nav>
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="firebase-init.js"></script> 
+    <script src="history.js"></script>
+</body>
+</html>

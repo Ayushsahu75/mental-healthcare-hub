@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chat Support - Mental Wellness Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <!-- GSAP Animation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+</head>
+<body class="chatbot-body">
+    <!-- Header -->
+    <header class="page-header">
+        <div class="container">
+            <button class="back-btn" onclick="window.location.href='dashboard.html'">← Back</button>
+            <h1>AI Chat Support</h1>
+            <div class="header-actions">
+                <button class="btn btn-secondary" onclick="showEmergencyOptions()">Emergency</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="chatbot-main">
+        <div class="container">
+            <div class="chat-layout">
+                <!-- Chat Container -->
+                <div class="chat-container">
+                    <div class="chat-messages" id="chatMessages">
+                        <!-- Welcome Message -->
+                        <div class="message bot-message">
+                            <div class="message-avatar">🤖</div>
+                            <div class="message-content">
+                                <div class="message-text">
+                                    Hi! I'm your AI wellness assistant. I'm here to provide support, coping strategies, and guidance. 
+                                    How can I help you today? Remember, this conversation is completely confidential.
+                                </div>
+                                <div class="message-time">Just now</div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Response Options -->
+                        <div class="quick-responses">
+                            <button class="quick-response-btn" onclick="sendQuickResponse('I feel anxious')">
+                                I feel anxious
+                            </button>
+                            <button class="quick-response-btn" onclick="sendQuickResponse('I need help with stress')">
+                                I need help with stress
+                            </button>
+                            <button class="quick-response-btn" onclick="sendQuickResponse('I feel sad')">
+                                I feel sad
+                            </button>
+                            <button class="quick-response-btn" onclick="sendQuickResponse('I feel angry')">
+                                I feel angry
+                            </button>
+                            <button class="quick-response-btn" onclick="sendQuickResponse('I need breathing exercises')">
+                                Breathing exercises
+                            </button>
+                            <button class="quick-response-btn" onclick="sendQuickResponse('I have sleep issues')">
+                                Sleep issues
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Chat Input -->
+                    <div class="chat-input-container">
+                        <div class="chat-input-wrapper">
+                            <button class="action-btn mic-btn" id="micButton" title="Start Voice Input">🎤</button>
+                            <textarea id="chatInput" placeholder="Type your message here..." rows="1"></textarea>
+                            <button class="send-btn" onclick="sendMessage()">
+                                <span>Send</span>
+                            </button>
+                        </div>
+                        <div class="input-actions">
+                            <button class="action-btn" onclick="attachFile()">📎</button>
+                            <button class="action-btn" onclick="sendEmoji()">😊</button>
+                            <button class="action-btn" onclick="clearChat()">🗑️</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="chat-sidebar">
+                    <div class="sidebar-section">
+                        <h3>Quick Actions</h3>
+                        <div class="action-buttons">
+                            <button class="sidebar-btn" onclick="window.location.href='resources.html'">
+                                <div class="btn-icon">💡</div>
+                                <span>Coping Strategies</span>
+                            </button>
+                            <button class="sidebar-btn" onclick="window.location.href='booking.html'">
+                                <div class="btn-icon">🧘</div>
+                                <span>Relaxation Guide</span>
+                            </button>
+                            <button class="sidebar-btn" onclick="window.location.href='sounds.html'">
+                                <div class="btn-icon">😴</div>
+                                <span>Sleep Help</span>
+                            </button>
+                            <button class="sidebar-btn" onclick="window.location.href='resources.html'">
+                                <div class="btn-icon">📚</div>
+                                <span>Study Tips</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3>Website Features</h3>
+                        <div class="action-buttons">
+                            <button class="sidebar-btn" onclick="window.location.href='breathing-exercises.html'">
+                                <div class="btn-icon">🫁</div>
+                                <span>Breathing Exercises</span>
+                            </button>
+                            <button class="sidebar-btn" onclick="window.location.href='sounds.html'">
+                                <div class="btn-icon">🎵</div>
+                                <span>Calming Sounds</span>
+                            </button>
+                            <button class="sidebar-btn" onclick="window.location.href='resources.html'">
+                                <div class="btn-icon">📚</div>
+                                <span>Resources</span>
+                            </button>
+                            <button class="sidebar-btn" onclick="window.location.href='mood-tracker.html'">
+                                <div class="btn-icon">📊</div>
+                                <span>Mood Tracker</span>
+                            </button>
+                            <button class="sidebar-btn" onclick="window.location.href='community.html'">
+                                <div class="btn-icon">👥</div>
+                                <span>Community</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3>Emergency Resources</h3>
+                        <div class="emergency-resources">
+                            <div class="emergency-item">
+                                <strong>National Helpline</strong>
+                                <p>1800-599-0019</p>
+                                <button class="call-btn" onclick="callHelpline()">Call Now</button>
+                            </div>
+                            <div class="emergency-item">
+                                <strong>Crisis Text Line</strong>
+                                <p>Text HOME to 741741</p>
+                                <button class="call-btn" onclick="textCrisis()">Text Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3>Professional Support</h3>
+                        <button class="btn btn-primary btn-full" onclick="window.location.href='booking.html'">
+                            Book Counsellor
+                        </button>
+                        <p class="sidebar-note">
+                            Connect with trained mental health professionals at your institution.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Typing Indicator -->
+    <div class="typing-indicator" id="typingIndicator" style="display: none;">
+        <div class="typing-dots">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <span>AI is typing...</span>
+    </div>
+
+    <!-- Emergency Modal -->
+    <div id="emergencyModal" class="modal">
+        <div class="modal-content emergency-modal">
+            <h3>🚨 Emergency Support</h3>
+            <p>If you're in immediate danger or having thoughts of self-harm, please reach out for help immediately.</p>
+            
+            <div class="emergency-options">
+                <button class="emergency-btn" onclick="callEmergency()">
+                    <div class="emergency-icon">📞</div>
+                    <div class="emergency-text">
+                        <strong>Call Emergency Services</strong>
+                        <p>Police: 100 | Ambulance: 108</p>
+                    </div>
+                </button>
+                
+                <button class="emergency-btn" onclick="callHelpline()">
+                    <div class="emergency-icon">🆘</div>
+                    <div class="emergency-text">
+                        <strong>Mental Health Helpline</strong>
+                        <p>1800-599-0019 (24/7)</p>
+                    </div>
+                </button>
+                
+                <button class="emergency-btn" onclick="textCrisis()">
+                    <div class="emergency-icon">💬</div>
+                    <div class="emergency-text">
+                        <strong>Crisis Text Line</strong>
+                        <p>Text HOME to 741741</p>
+                    </div>
+                </button>
+            </div>
+            
+            <div class="emergency-footer">
+                <p><strong>You are not alone.</strong> Help is available and people care about you.</p>
+                <button class="btn btn-secondary btn-small" onclick="callHelpline('988')">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Emoji Picker Modal -->
+    <div id="emojiModal" class="modal">
+        <div class="modal-content emoji-modal">
+            <span class="close">&times;</span>
+            <h3>Choose an Emoji</h3>
+            <div class="emoji-grid">
+                <button class="emoji-btn" onclick="insertEmoji('😊')">😊</button>
+                <button class="emoji-btn" onclick="insertEmoji('😢')">😢</button>
+                <button class="emoji-btn" onclick="insertEmoji('😰')">😰</button>
+                <button class="emoji-btn" onclick="insertEmoji('😔')">😔</button>
+                <button class="emoji-btn" onclick="insertEmoji('😴')">😴</button>
+                <button class="emoji-btn" onclick="insertEmoji('😡')">😡</button>
+                <button class="emoji-btn" onclick="insertEmoji('🤔')">🤔</button>
+                <button class="emoji-btn" onclick="insertEmoji('😌')">😌</button>
+                <button class="emoji-btn" onclick="insertEmoji('🙏')">🙏</button>
+                <button class="emoji-btn" onclick="insertEmoji('💪')">💪</button>
+                <button class="emoji-btn" onclick="insertEmoji('❤️')">❤️</button>
+                <button class="emoji-btn" onclick="insertEmoji('✨')">✨</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="dashboard.html" class="nav-item">
+            <div class="nav-icon">🏠</div>
+            <span>Home</span>
+        </a>
+        <a href="chatbot.html" class="nav-item">
+            <div class="nav-icon">💬</div>
+            <span>Chat</span>
+        </a>
+    
+        <a href="breathing-exercises.html" class="nav-item">
+            <div class="nav-icon">🫁</div>
+            <span>Breath</span>
+        </a>
+        <a href="resources.html" class="nav-item">
+            <div class="nav-icon">🔍</div>
+            <span>Discover</span>
+        </a>
+        <a href="sounds.html" class="nav-item">
+            <div class="nav-icon">🎵</div>
+            <span>Sounds</span>
+        </a>
+        
+    </nav>
+    <script src="auth-guard.js"></script>
+    <script src="chatbot.js"></script>
+    <script src="gsap-animations.js"></script>
+</body>
+</html>

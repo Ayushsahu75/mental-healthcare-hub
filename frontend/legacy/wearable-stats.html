@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Dashboard - Mental Wellness Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="wearable-stats-body">
+    <!-- Header -->
+    <header class="page-header">
+        <div class="container">
+            <button class="back-btn" onclick="window.location.href='dashboard.html'">← Back</button>
+            <h1>Health Dashboard</h1>
+            <div class="header-actions">
+                <button class="btn btn-secondary" onclick="syncDevice()">Sync Device</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="wearable-main">
+        <div class="container">
+            <!-- Today's Overview -->
+            <section class="overview-section">
+                <div class="overview-header">
+                    <h2>Today's Overview</h2>
+                    <div class="date-selector">
+                        <button class="date-btn" onclick="changeDate(-1)">←</button>
+                        <span id="currentDate">January 15, 2024</span>
+                        <button class="date-btn" onclick="changeDate(1)">→</button>
+                    </div>
+                </div>
+
+                <div class="overview-grid">
+                    <div class="overview-card heart-rate">
+                        <div class="card-icon">❤️</div>
+                        <div class="card-content">
+                            <h3>Heart Rate</h3>
+                            <div class="metric-value">72</div>
+                            <div class="metric-unit">BPM</div>
+                            <div class="metric-status good">Normal</div>
+                        </div>
+                        <div class="card-chart">
+                            <canvas id="heartRateChart" width="100" height="40"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="overview-card sleep">
+                        <div class="card-icon">😴</div>
+                        <div class="card-content">
+                            <h3>Sleep</h3>
+                            <div class="metric-value">7.5</div>
+                            <div class="metric-unit">hours</div>
+                            <div class="metric-status good">Good</div>
+                        </div>
+                        <div class="card-chart">
+                            <canvas id="sleepChart" width="100" height="40"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="overview-card steps">
+                        <div class="card-icon">👟</div>
+                        <div class="card-content">
+                            <h3>Steps</h3>
+                            <div class="metric-value">8,247</div>
+                            <div class="metric-unit">steps</div>
+                            <div class="metric-status warning">Below goal</div>
+                        </div>
+                        <div class="card-chart">
+                            <canvas id="stepsChart" width="100" height="40"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="overview-card stress">
+                        <div class="card-icon">🧠</div>
+                        <div class="card-content">
+                            <h3>Stress Level</h3>
+                            <div class="metric-value">65</div>
+                            <div class="metric-unit">%</div>
+                            <div class="metric-status warning">Elevated</div>
+                        </div>
+                        <div class="card-chart">
+                            <canvas id="stressChart" width="100" height="40"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Detailed Metrics -->
+            <section class="metrics-section">
+                <div class="metrics-tabs">
+                    <button class="tab-btn active" data-tab="heart-rate">Heart Rate</button>
+                    <button class="tab-btn" data-tab="sleep">Sleep</button>
+                    <button class="tab-btn" data-tab="activity">Activity</button>
+                    <button class="tab-btn" data-tab="stress">Stress</button>
+                </div>
+
+                <!-- Heart Rate Tab -->
+                <div class="tab-content active" id="heart-rate">
+                    <div class="metric-detail-card">
+                        <h3>Heart Rate Analysis</h3>
+                        <div class="hr-zones">
+                            <div class="zone-card">
+                                <div class="zone-color resting"></div>
+                                <span class="zone-name">Resting</span>
+                                <span class="zone-range">60-100 BPM</span>
+                                <span class="zone-time">85%</span>
+                            </div>
+                            <div class="zone-card">
+                                <div class="zone-color fat-burn"></div>
+                                <span class="zone-name">Fat Burn</span>
+                                <span class="zone-range">100-120 BPM</span>
+                                <span class="zone-time">12%</span>
+                            </div>
+                            <div class="zone-card">
+                                <div class="zone-color cardio"></div>
+                                <span class="zone-name">Cardio</span>
+                                <span class="zone-range">120-140 BPM</span>
+                                <span class="zone-time">3%</span>
+                            </div>
+                        </div>
+                        <div class="hr-chart">
+                            <canvas id="detailedHRChart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sleep Tab -->
+                <div class="tab-content" id="sleep">
+                    <div class="metric-detail-card">
+                        <h3>Sleep Analysis</h3>
+                        <div class="sleep-stages">
+                            <div class="stage-card deep">
+                                <div class="stage-icon">💤</div>
+                                <div class="stage-info">
+                                    <h4>Deep Sleep</h4>
+                                    <p>2h 15m</p>
+                                    <span class="stage-percentage">30%</span>
+                                </div>
+                            </div>
+                            <div class="stage-card light">
+                                <div class="stage-icon">😴</div>
+                                <div class="stage-info">
+                                    <h4>Light Sleep</h4>
+                                    <p>4h 30m</p>
+                                    <span class="stage-percentage">60%</span>
+                                </div>
+                            </div>
+                            <div class="stage-card rem">
+                                <div class="stage-icon">🧠</div>
+                                <div class="stage-info">
+                                    <h4>REM Sleep</h4>
+                                    <p>45m</p>
+                                    <span class="stage-percentage">10%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sleep-insights">
+                            <div class="insight-item">
+                                <span class="insight-icon">⏰</span>
+                                <div class="insight-content">
+                                    <h4>Bedtime</h4>
+                                    <p>You went to bed at 11:30 PM</p>
+                                </div>
+                            </div>
+                            <div class="insight-item">
+                                <span class="insight-icon">🌅</span>
+                                <div class="insight-content">
+                                    <h4>Wake Time</h4>
+                                    <p>You woke up at 7:00 AM</p>
+                                </div>
+                            </div>
+                            <div class="insight-item">
+                                <span class="insight-icon">📈</span>
+                                <div class="insight-content">
+                                    <h4>Sleep Score</h4>
+                                    <p>Your sleep quality was 78/100</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity Tab -->
+                <div class="tab-content" id="activity">
+                    <div class="metric-detail-card">
+                        <h3>Activity Summary</h3>
+                        <div class="activity-goals">
+                            <div class="goal-card">
+                                <div class="goal-progress">
+                                    <div class="progress-circle steps-progress" data-percentage="82">
+                                        <span class="progress-text">8,247</span>
+                                        <span class="progress-label">Steps</span>
+                                    </div>
+                                </div>
+                                <div class="goal-info">
+                                    <h4>Daily Steps</h4>
+                                    <p>Goal: 10,000 steps</p>
+                                    <span class="goal-remaining">1,753 remaining</span>
+                                </div>
+                            </div>
+                            <div class="goal-card">
+                                <div class="goal-progress">
+                                    <div class="progress-circle calories-progress" data-percentage="65">
+                                        <span class="progress-text">1,950</span>
+                                        <span class="progress-label">Calories</span>
+                                    </div>
+                                </div>
+                                <div class="goal-info">
+                                    <h4>Calories Burned</h4>
+                                    <p>Goal: 3,000 calories</p>
+                                    <span class="goal-remaining">1,050 remaining</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="activity-chart">
+                            <canvas id="activityChart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stress Tab -->
+                <div class="tab-content" id="stress">
+                    <div class="metric-detail-card">
+                        <h3>Stress Monitoring</h3>
+                        <div class="stress-levels">
+                            <div class="stress-period">
+                                <h4>Morning</h4>
+                                <div class="stress-bar">
+                                    <div class="stress-fill" style="width: 45%"></div>
+                                    <span class="stress-value">45%</span>
+                                </div>
+                            </div>
+                            <div class="stress-period">
+                                <h4>Afternoon</h4>
+                                <div class="stress-bar">
+                                    <div class="stress-fill" style="width: 75%"></div>
+                                    <span class="stress-value">75%</span>
+                                </div>
+                            </div>
+                            <div class="stress-period">
+                                <h4>Evening</h4>
+                                <div class="stress-bar">
+                                    <div class="stress-fill" style="width: 65%"></div>
+                                    <span class="stress-value">65%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stress-recommendations">
+                            <h4>Recommendations</h4>
+                            <div class="recommendation-item">
+                                <span class="rec-icon">🫁</span>
+                                <span>Try 5 minutes of breathing exercises</span>
+                            </div>
+                            <div class="recommendation-item">
+                                <span class="rec-icon">🚶</span>
+                                <span>Take a 10-minute walk</span>
+                            </div>
+                            <div class="recommendation-item">
+                                <span class="rec-icon">🧘</span>
+                                <span>Practice mindfulness meditation</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Wellness Insights -->
+            <section class="insights-section">
+                <h2>Wellness Insights</h2>
+                <div class="insights-grid">
+                    <div class="insight-card">
+                        <div class="insight-icon">📊</div>
+                        <h3>Weekly Trend</h3>
+                        <p>Your stress levels have decreased by 15% compared to last week. Great job!</p>
+                    </div>
+                    <div class="insight-card">
+                        <div class="insight-icon">🎯</div>
+                        <h3>Goal Progress</h3>
+                        <p>You've met your sleep goal 5 out of 7 days this week.</p>
+                    </div>
+                    <div class="insight-card">
+                        <div class="insight-icon">💡</div>
+                        <h3>Recommendation</h3>
+                        <p>Try to increase your daily steps by 500 to reach your goal.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Device Connection Modal -->
+    <div id="deviceModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Connect Device</h3>
+            <p>Sync your wearable device to track health metrics</p>
+            
+            <div class="device-options">
+                <button class="device-btn">
+                    <div class="device-icon">⌚</div>
+                    <span>Apple Watch</span>
+                </button>
+                <button class="device-btn">
+                    <div class="device-icon">📱</div>
+                    <span>Fitbit</span>
+                </button>
+                <button class="device-btn">
+                    <div class="device-icon">🔗</div>
+                    <span>Samsung Health</span>
+                </button>
+                <button class="device-btn">
+                    <div class="device-icon">📊</div>
+                    <span>Google Fit</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="dashboard.html" class="nav-item">
+            <div class="nav-icon">🏠</div>
+            <span>Home</span>
+        </a>
+        <a href="chatbot.html" class="nav-item">
+            <div class="nav-icon">💬</div>
+            <span>Chat</span>
+        </a>
+        
+        <a href="breathing-exercises.html" class="nav-item">
+            <div class="nav-icon">🫁</div>
+            <span>Breath</span>
+        </a>
+        <a href="resources.html" class="nav-item">
+            <div class="nav-icon">🔍</div>
+            <span>Discover</span>
+        </a>
+        <a href="sounds.html" class="nav-item">
+            <div class="nav-icon">🎵</div>
+            <span>Sounds</span>
+        </a>
+        
+    </nav>
+    <script src="auth-guard.js"></script>
+    <script src="wearable-stats.js"></script>
+</body>
+</html>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Counsellor - Mental Wellness Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="booking-body">
+    <!-- Header -->
+    <header class="page-header">
+        <div class="container">
+            <button class="back-btn" onclick="window.location.href='dashboard.html'">← Back</button>
+            <h1>Book Counsellor</h1>
+            <div class="header-actions">
+                <button class="btn btn-secondary" onclick="viewMyAppointments()">My Appointments</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="booking-main">
+        <div class="container">
+            <!-- Booking Steps -->
+            <div class="booking-steps">
+                <div class="step active" data-step="1">
+                    <div class="step-number">1</div>
+                    <span>Choose Counsellor</span>
+                </div>
+                <div class="step" data-step="2">
+                    <div class="step-number">2</div>
+                    <span>Select Date & Time</span>
+                </div>
+                <div class="step" data-step="3">
+                    <div class="step-number">3</div>
+                    <span>Confirm Booking</span>
+                </div>
+            </div>
+
+            <!-- Step 1: Choose Counsellor -->
+            <section class="booking-section" id="counsellorSection">
+                <div class="section-header">
+                    <h2>Available Counsellors</h2>
+                    <p>Choose a counsellor that fits your needs</p>
+                </div>
+
+                <div class="counsellor-grid">
+                    <div class="counsellor-card" data-counsellor="dr-smith">
+                        <div class="counsellor-photo">
+                            <img src="https://via.placeholder.com/120x120/4F46E5/FFFFFF?text=DS" alt="Dr. Smith">
+                        </div>
+                        <div class="counsellor-info">
+                            <h3> Ayush Sahu</h3>
+                            <p class="specialization">Clinical Psychologist</p>
+                            <div class="specialties">
+                                <span class="specialty">Anxiety</span>
+                                <span class="specialty">Depression</span>
+                                <span class="specialty">Academic Stress</span>
+                            </div>
+                            <div class="rating">
+                                <span class="stars">⭐⭐⭐⭐⭐</span>
+                                <span class="rating-text">4.9/5 (127 reviews)</span>
+                            </div>
+                            <div class="availability">
+                                <span class="available">Available today</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" onclick="selectCounsellor('dr-smith')">Select</button>
+                    </div>
+
+                    <div class="counsellor-card" data-counsellor="dr-johnson">
+                        <div class="counsellor-photo">
+                            <img src="https://via.placeholder.com/120x120/4F46E5/FFFFFF?text=MJ" alt="Dr. Johnson">
+                        </div>
+                        <div class="counsellor-info">
+                            <h3>Swastik Mishra  </h3>
+                            <p class="specialization">Counselling Psychologist</p>
+                            <div class="specialties">
+                                <span class="specialty">Relationships</span>
+                                <span class="specialty">Career Guidance</span>
+                                <span class="specialty">Life Transitions</span>
+                            </div>
+                            <div class="rating">
+                                <span class="stars">⭐⭐⭐⭐⭐</span>
+                                <span class="rating-text">4.8/5 (89 reviews)</span>
+                            </div>
+                            <div class="availability">
+                                <span class="available">Available tomorrow</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" onclick="selectCounsellor('dr-johnson')">Select</button>
+                    </div>
+
+                    <div class="counsellor-card" data-counsellor="ms-wilson">
+                        <div class="counsellor-photo">
+                            <img src="https://via.placeholder.com/120x120/4F46E5/FFFFFF?text=LW" alt="Ms. Wilson">
+                        </div>
+                        <div class="counsellor-info">
+                            <h3> Hasan</h3>
+                            <p class="specialization">Mental Health Counsellor</p>
+                            <div class="specialties">
+                                <span class="specialty">Trauma</span>
+                                <span class="specialty">Self-esteem</span>
+                                <span class="specialty">Mindfulness</span>
+                            </div>
+                            <div class="rating">
+                                <span class="stars">⭐⭐⭐⭐⭐</span>
+                                <span class="rating-text">4.9/5 (156 reviews)</span>
+                            </div>
+                            <div class="availability">
+                                <span class="available">Available today</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" onclick="selectCounsellor('ms-wilson')">Select</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 2: Select Date & Time -->
+            <section class="booking-section" id="datetimeSection" style="display: none;">
+                <div class="section-header">
+                    <h2>Select Date & Time</h2>
+                    <p>Choose your preferred appointment slot</p>
+                </div>
+
+                <div class="datetime-container">
+                    <div class="date-selector">
+                        <h3>Available Dates</h3>
+                        <div class="date-grid">
+                            <button class="date-btn" data-date="2024-01-15">
+                                <div class="date-day">Mon</div>
+                                <div class="date-number">15</div>
+                                <div class="date-month">Jan</div>
+                            </button>
+                            <button class="date-btn" data-date="2024-01-16">
+                                <div class="date-day">Tue</div>
+                                <div class="date-number">16</div>
+                                <div class="date-month">Jan</div>
+                            </button>
+                            <button class="date-btn" data-date="2024-01-17">
+                                <div class="date-day">Wed</div>
+                                <div class="date-number">17</div>
+                                <div class="date-month">Jan</div>
+                            </button>
+                            <button class="date-btn" data-date="2024-01-18">
+                                <div class="date-day">Thu</div>
+                                <div class="date-number">18</div>
+                                <div class="date-month">Jan</div>
+                            </button>
+                            <button class="date-btn" data-date="2024-01-19">
+                                <div class="date-day">Fri</div>
+                                <div class="date-number">19</div>
+                                <div class="date-month">Jan</div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="time-selector">
+                        <h3>Available Times</h3>
+                        <div class="time-grid">
+                            <button class="time-btn" data-time="09:00">9:00 AM</button>
+                            <button class="time-btn" data-time="10:30">10:30 AM</button>
+                            <button class="time-btn" data-time="12:00">12:00 PM</button>
+                            <button class="time-btn" data-time="14:00">2:00 PM</button>
+                            <button class="time-btn" data-time="15:30">3:30 PM</button>
+                            <button class="time-btn" data-time="17:00">5:00 PM</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="session-type">
+                    <h3>Session Type</h3>
+                    <div class="session-options">
+                        <label class="session-option">
+                            <input type="radio" name="sessionType" value="in-person" checked>
+                            <div class="option-content">
+                                <strong>In-Person</strong>
+                                <p>Counselling Centre, Room 205</p>
+                            </div>
+                        </label>
+                        <label class="session-option">
+                            <input type="radio" name="sessionType" value="video">
+                            <div class="option-content">
+                                <strong>Video Call</strong>
+                                <p>Secure online session</p>
+                            </div>
+                        </label>
+                        <label class="session-option">
+                            <input type="radio" name="sessionType" value="phone">
+                            <div class="option-content">
+                                <strong>Phone Call</strong>
+                                <p>Audio-only session</p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 3: Confirm Booking -->
+            <section class="booking-section" id="confirmSection" style="display: none;">
+                <div class="section-header">
+                    <h2>Confirm Your Booking</h2>
+                    <p>Review your appointment details</p>
+                </div>
+
+                <div class="booking-summary">
+                    <div class="summary-card">
+                        <h3>Appointment Details</h3>
+                        <div class="summary-item">
+                            <strong>Counsellor:</strong>
+                            <span id="selectedCounsellor">Dr. Sarah Smith</span>
+                        </div>
+                        <div class="summary-item">
+                            <strong>Date:</strong>
+                            <span id="selectedDate">Monday, January 15, 2024</span>
+                        </div>
+                        <div class="summary-item">
+                            <strong>Time:</strong>
+                            <span id="selectedTime">10:30 AM</span>
+                        </div>
+                        <div class="summary-item">
+                            <strong>Session Type:</strong>
+                            <span id="selectedSessionType">In-Person</span>
+                        </div>
+                        <div class="summary-item">
+                            <strong>Duration:</strong>
+                            <span>50 minutes</span>
+                        </div>
+                        <div class="summary-item">
+                            <strong>Location:</strong>
+                            <span id="sessionLocation">Counselling Centre, Room 205</span>
+                        </div>
+                    </div>
+
+                    <div class="booking-form">
+                        <h3>Additional Information</h3>
+                        <div class="form-group">
+                            <label for="concerns">What would you like to discuss? (Optional)</label>
+                            <textarea id="concerns" placeholder="Briefly describe what you'd like to talk about..." rows="3"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="preferences">Any preferences or accommodations?</label>
+                            <textarea id="preferences" placeholder="Any specific needs or preferences..." rows="2"></textarea>
+                        </div>
+
+                        <div class="consent-checkbox">
+                            <label class="checkbox-container">
+                                <input type="checkbox" id="consent" required>
+                                <span class="checkmark"></span>
+                                I understand that this session is confidential and agree to the terms of service.
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Navigation Buttons -->
+            <div class="booking-navigation">
+                <button class="btn btn-secondary" id="prevBtn" onclick="previousStep()" style="display: none;">Previous</button>
+                <button class="btn btn-primary" id="nextBtn" onclick="nextStep()">Next</button>
+                <button class="btn btn-success" id="confirmBtn" onclick="confirmBooking()" style="display: none;">Confirm Booking</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Booking Success Modal -->
+    <div id="bookingSuccessModal" class="modal">
+        <div class="modal-content success-modal">
+            <div class="success-icon">✅</div>
+            <h3>Booking Confirmed!</h3>
+            <p>Your appointment has been successfully booked.</p>
+            
+            <div class="appointment-details">
+                <div class="detail-item">
+                    <strong>Counsellor:</strong>
+                    <span id="finalCounsellor">Dr. Sarah Smith</span>
+                </div>
+                <div class="detail-item">
+                    <strong>Date & Time:</strong>
+                    <span id="finalDateTime">Monday, Jan 15, 2024 at 10:30 AM</span>
+                </div>
+                <div class="detail-item">
+                    <strong>Location:</strong>
+                    <span id="finalLocation">Counselling Centre, Room 205</span>
+                </div>
+            </div>
+
+            <div class="success-actions">
+                <button class="btn btn-primary" onclick="addToCalendar()">Add to Calendar</button>
+                <button class="btn btn-secondary" onclick="closeSuccessModal()">Done</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="dashboard.html" class="nav-item">
+            <div class="nav-icon">🏠</div>
+            <span>Home</span>
+        </a>
+        <a href="chatbot.html" class="nav-item">
+            <div class="nav-icon">💬</div>
+            <span>Chat</span>
+        </a>
+        <a href="breathing-exercises.html" class="nav-item">
+            <div class="nav-icon">🫁</div>
+            <span>Breath</span>
+        </a>
+        <a href="resources.html" class="nav-item">
+            <div class="nav-icon">🔍</div>
+            <span>Discover</span>
+        </a>
+        <a href="sounds.html" class="nav-item">
+            <div class="nav-icon">🎵</div>
+            <span>Sounds</span>
+        </a>
+    </nav>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="firebase-init.js"></script> 
+    <script src="auth-guard.js"></script>
+    <script src="booking.js"></script>
+</body>
+</html>

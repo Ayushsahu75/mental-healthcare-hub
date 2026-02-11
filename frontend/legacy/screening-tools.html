@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Screening Tools - Mental Wellness Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dashboard-body">
+  <header class="header">
+    <div class="container">
+      <div class="logo" onclick="window.location.href='index.html'">
+        <div class="logo-img">M</div>
+        <span class="logo-text">Mental Wellness Hub</span>
+      </div>
+      <div class="header-actions">
+        <button class="back-btn" onclick="history.back()">← Back</button>
+        <button class="btn btn-secondary btn-small" onclick="window.location.href='resources.html'">📚 Resources</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="dashboard-main">
+    <div class="container">
+      <section class="dashboard-welcome">
+        <div class="welcome-content">
+          <h1 class="welcome-title">📊 Screening Tools</h1>
+          <p class="welcome-subtitle">Self-assess with clinically validated questionnaires (PHQ-9 and GAD-7)</p>
+        </div>
+        <div class="welcome-stats">
+          <div class="stat-card"><div class="stat-value">10</div><div class="stat-label">Minutes</div></div>
+          <div class="stat-card"><div class="stat-value">Private</div><div class="stat-label">Anonymous</div></div>
+        </div>
+      </section>
+
+      <div class="dashboard-grid">
+        <div class="card dashboard-card">
+          <div class="card-header"><h3>🧠 PHQ-9 (Depression)</h3><p>Past 2 weeks frequency</p></div>
+          <div id="phq9"></div>
+          <button class="btn btn-primary btn-small" onclick="score('phq9')">Calculate PHQ-9 Score</button>
+          <div id="phq9Result" style="margin-top:12px;font-weight:600"></div>
+        </div>
+
+        <div class="card dashboard-card">
+          <div class="card-header"><h3>😰 GAD-7 (Anxiety)</h3><p>Past 2 weeks frequency</p></div>
+          <div id="gad7"></div>
+          <button class="btn btn-primary btn-small" onclick="score('gad7')">Calculate GAD-7 Score</button>
+          <div id="gad7Result" style="margin-top:12px;font-weight:600"></div>
+        </div>
+      </div>
+
+      <div style="text-align:center;margin-top:var(--spacing-xl)">
+        <button class="btn btn-accent" onclick="window.location.href='booking.html'">Discuss with a Counsellor</button>
+      </div>
+    </div>
+  </main>
+
+  <nav class="bottom-nav">
+    <a href="dashboard.html" class="nav-item"><div class="nav-icon">🏠</div><span>Home</span></a>
+    <a href="chatbot.html" class="nav-item"><div class="nav-icon">💬</div><span>Chat</span></a>
+    <a href="breathing-exercises.html" class="nav-item"><div class="nav-icon">🫁</div><span>Breath</span></a>
+    <a href="resources.html" class="nav-item"><div class="nav-icon">🔍</div><span>Discover</span></a>
+    <a href="sounds.html" class="nav-item"><div class="nav-icon">🎵</div><span>Sounds</span></a>
+  </nav>
+
+  <script src="auth-guard.js"></script>
+  <script>
+    const PHQ9 = [
+      'Little interest or pleasure in doing things',
+      'Feeling down, depressed, or hopeless',
+      'Trouble falling or staying asleep, or sleeping too much',
+      'Feeling tired or having little energy',
+      'Poor appetite or overeating',
+      'Feeling bad about yourself — or that you are a failure',
+      'Trouble concentrating on things',
+      'Moving or speaking slowly or being fidgety/restless',
+      'Thoughts that you would be better off dead or of hurting yourself'
+    ];
+    const GAD7 = [
+      'Feeling nervous, anxious, or on edge',
+      'Not being able to stop or control worrying',
+      'Worrying too much about different things',
+      'Trouble relaxing',
+      'Being so restless that it is hard to sit still',
+      'Becoming easily annoyed or irritable',
+      'Feeling afraid as if something awful might happen'
+    ];
+    const choices = [
+      {label:'Not at all', value:0},
+      {label:'Several days', value:1},
+      {label:'More than half the days', value:2},
+      {label:'Nearly every day', value:3}
+    ];
+
+    function render(id, questions){
+      const container = document.getElementById(id);
+      const list = document.createElement('div');
+      list.className = 'resources-grid';
+      questions.forEach((q,i)=>{
+        const item = document.createElement('div');
+        item.className = 'resource-item';
+        item.innerHTML = `<div class="resource-content"><h4>${i+1}. ${q}</h4>${choices.map((c,idx)=>`<label style='margin-right:12px'><input type='radio' name='${id}_${i}' value='${c.value}'> ${c.label}</label>`).join('')}</div>`;
+        list.appendChild(item);
+      });
+      container.appendChild(list);
+    }
+
+    function score(id){
+      const qs = Array.from(document.querySelectorAll(`[name^="${id}_"]`));
+      const grouped = qs.reduce((m,i)=>{ const k=i.name; (m[k]=m[k]||[]).push(i); return m; },{});
+      let total = 0; let unanswered=0;
+      Object.values(grouped).forEach(radios=>{
+        const sel = radios.find(r=>r.checked); if(sel){ total += parseInt(sel.value); } else { unanswered++; }
+      });
+      const resultId = id==='phq9'?'phq9Result':'gad7Result';
+      let interpretation = '';
+      if(id==='phq9'){
+        if(total<=4) interpretation='Minimal'; else if(total<=9) interpretation='Mild'; else if(total<=14) interpretation='Moderate'; else if(total<=19) interpretation='Moderately Severe'; else interpretation='Severe';
+      } else {
+        if(total<=4) interpretation='Minimal'; else if(total<=9) interpretation='Mild'; else if(total<=14) interpretation='Moderate'; else interpretation='Severe';
+      }
+      document.getElementById(resultId).textContent = `Score: ${total} (${interpretation})` + (unanswered?` • ${unanswered} unanswered`:'');
+    }
+
+    // initial render
+    render('phq9', PHQ9);
+    render('gad7', GAD7);
+  </script>
+</body>
+</html>

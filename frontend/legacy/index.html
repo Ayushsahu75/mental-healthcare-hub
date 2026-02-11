@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Wellness Hub - Your Digital Mental Health Companion</title>
+    <meta name="description" content="Transform your mental wellbeing with AI-powered support, professional counseling, and evidence-based wellness tools designed for modern life.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%2338bdf8'/><text x='50' y='70' text-anchor='middle' font-size='60' font-weight='800' fill='white'>M</text></svg">
+    <!-- GSAP Animation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+<script src="firebase-init.js"></script>
+</head>
+<body class="index-body">
+    <!-- Modern Header with Glassmorphism -->
+    <header class="header" id="header">
+        <div class="container">
+            <div class="logo" onclick="window.location.href='index.html'">
+                <div class="logo-img">M</div>
+                <span class="logo-text">Mental Wellness Hub</span>
+            </div>
+            <nav class="nav">
+                <a href="dashboard.html" class="nav-link">
+                    <span>Dashboard</span>
+                </a>
+                <a href="chatbot.html" class="nav-link">
+                    <span>AI Support</span>
+                </a>
+                <a href="resources.html" class="nav-link">
+                    <span>Resources</span>
+                </a>
+                <a href="booking.html" class="nav-link">
+                    <span>Book Session</span>
+                </a>
+                <div class="language-selector">
+                    <select id="languageSelect" class="language-dropdown">
+                        <option value="en">🇺🇸 EN</option>
+                        <option value="hi">🇮🇳 हिंदी</option>
+                        <option value="ta">🇮🇳 தமிழ்</option>
+                        <option value="te">🇮🇳 తెలుగు</option>
+                        <option value="bn">🇮🇳 বাংলা</option>
+                    </select>
+                </div>
+                <a href="login.html" class="btn btn-primary btn-small">
+                    Get Started
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Modern Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Transform Your Mental Wellness Journey</h1>
+                <p class="hero-subtitle">Discover AI-powered support, professional counseling, and evidence-based wellness tools designed to help you thrive in every aspect of life.</p>
+                <div class="hero-buttons">
+                    <a href="chatbot.html" class="btn btn-primary btn-large">
+                        🤖 Start AI Support
+                    </a>
+                    <a href="dashboard.html" class="btn btn-secondary btn-large">
+                        📊 Explore Dashboard
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <span class="hero-stat-number">10k+</span>
+                        <span class="hero-stat-label">Students Helped</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-number">24/7</span>
+                        <span class="hero-stat-label">AI Support</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-number">95%</span>
+                        <span class="hero-stat-label">Satisfaction Rate</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Mental Wellness Support - Professional Healthcare">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Comprehensive Mental Health Support</h2>
+            <p style="text-align: center; max-width: 600px; margin: 0 auto var(--spacing-2xl) auto; color: var(--neutral-600); font-size: 1.125rem;">Experience evidence-based mental health tools designed by professionals to support your wellbeing journey.</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI Wellness Assistant</h3>
+                    <p>Get instant, personalized support from our AI companion trained on evidence-based therapeutic approaches.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👨‍⚕️</div>
+                    <h3>Professional Counseling</h3>
+                    <p>Connect with licensed mental health professionals through secure, confidential video sessions.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🫁</div>
+                    <h3>Mindfulness Tools</h3>
+                    <p>Access guided breathing exercises, meditation, and relaxation techniques for immediate stress relief.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Mood Tracking</h3>
+                    <p>Monitor your emotional wellbeing with intelligent mood tracking and personalized insights.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>Community Support</h3>
+                    <p>Join a supportive community of peers navigating similar mental health challenges.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Complete Privacy</h3>
+                    <p>Your mental health journey is completely private with enterprise-grade security and confidentiality.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Access -->
+    <section class="quick-access">
+        <div class="container">
+            <h2  style="color: white; text-align: center;">Start Your Wellness Journey Today</h2>
+            <p style="text-align: center; max-width: 600px; margin: 0 auto var(--spacing-2xl) auto; color: var(--neutral-600); font-size: 1.125rem; color: white;">Choose the support that feels right for you - whether it's immediate relief or long-term care.</p>
+            <div class="quick-access-grid">
+                <a href="chatbot.html" class="quick-access-card">
+                    <div class="quick-icon">🤖</div>
+                    <span>AI Support Chat</span>
+                </a>
+                <a href="breathing-exercises.html" class="quick-access-card">
+                    <div class="quick-icon">🫁</div>
+                    <span>Breathing Exercises</span>
+                </a>
+                <a href="mood-tracker.html" class="quick-access-card">
+                    <div class="quick-icon">📊</div>
+                    <span>Track Your Mood</span>
+                </a>
+                <a href="booking.html" class="quick-access-card">
+                    <div class="quick-icon">👨‍⚕️</div>
+                    <span>Book Professional</span>
+                </a>
+                <a href="sounds.html" class="quick-access-card">
+                    <div class="quick-icon">🎵</div>
+                    <span>Relaxation Sounds</span>
+                </a>
+                <a href="community.html" class="quick-access-card">
+                    <div class="quick-icon">👥</div>
+                    <span>Join Community</span>
+                </a>
+            </div>
+            <div style="text-align: center; margin-top: var(--spacing-2xl);">
+                <a href="dashboard.html" class="btn btn-accent btn-large">
+                     Get Started Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modern Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Mental Wellness Hub</h4>
+                    <p>Empowering individuals with AI-driven mental health support, professional counseling, and evidence-based wellness tools for a healthier, more resilient life.</p>
+                    <div style="margin-top: var(--spacing-lg);">
+                        <a href="chatbot.html" class="btn btn-secondary btn-small">🤖 Try AI Support</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Emergency Support</h4>
+                    <p><strong>Crisis Helpline:</strong> 988</p>
+                    <p><strong>National Helpline:</strong> 1-800-599-0019</p>
+                    <p><strong>Text Support:</strong> Text HOME to 741741</p>
+                    <p style="font-size: 0.875rem; color: rgba(255,255,255,0.7);">Available 24/7 - You are not alone</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Access</h4>
+                    <a href="dashboard.html">📋 Dashboard</a>
+                    <a href="booking.html">👨‍⚕️ Book Session</a>
+                    <a href="resources.html">📚 Resources</a>
+                    <a href="community.html">👥 Community</a>
+                    <a href="mood-tracker.html">📊 Mood Tracker</a>
+                </div>
+                <div class="footer-section">
+                    <h4>About</h4>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Accessibility</a>
+                    <a href="#">Contact Us</a>
+                    <a href="#">Healthcare Providers</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Mental Wellness Hub. All rights reserved. | Designed with ❤️ for better mental health.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Modern JavaScript interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Header scroll effect
+            const header = document.getElementById('header');
+            let lastScroll = 0;
+            
+            window.addEventListener('scroll', () => {
+                const currentScroll = window.pageYOffset;
+                
+                if (currentScroll > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+                
+                lastScroll = currentScroll;
+            });
+            
+            // Smooth scrolling for internal links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+            // Intersection Observer for fade-in animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe elements for animation
+            document.querySelectorAll('.feature-card, .quick-access-card').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+            
+            // Button hover effects
+            document.querySelectorAll('.btn').forEach(btn => {
+                btn.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-2px)';
+                });
+                
+                btn.addEventListener('mouseleave', function() {
+                    this.style.transform = '';
+                });
+            });
+            
+            // Add loading animation to hero stats
+            const heroStats = document.querySelectorAll('.hero-stat-number');
+            heroStats.forEach(stat => {
+                const finalValue = stat.textContent;
+                const numericValue = parseInt(finalValue.replace(/\D/g, ''));
+                
+                if (!isNaN(numericValue) && numericValue > 0) {
+                    stat.textContent = '0';
+                    const increment = numericValue / 50;
+                    let current = 0;
+                    
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= numericValue) {
+                            stat.textContent = finalValue;
+                            clearInterval(timer);
+                        } else {
+                            stat.textContent = Math.floor(current) + finalValue.replace(/\d/g, '').slice(0, -1) + finalValue.slice(-1);
+                        }
+                    }, 20);
+                }
+            });
+            
+            
+            // Language selector functionality
+            document.getElementById('languageSelect')?.addEventListener('change', function() {
+                const selectedLang = this.value;
+                console.log('Language changed to:', selectedLang);
+                // Store language preference
+                localStorage.setItem('preferred-language', selectedLang);
+                // Here you would implement actual language switching logic
+                alert(`Language changed to ${selectedLang}\nThis demo shows UI elements - full translation would load appropriate content.`);
+            });
+            
+            console.log('🎉 Mental Wellness Hub loaded successfully!');
+        });
+    </script>
+    
+    <style>
+    .language-selector {
+        margin-right: var(--spacing-md);
+    }
+    .language-dropdown {
+        background: rgba(255,255,255,0.9);
+        border: 2px solid rgba(255,255,255,0.3);
+        border-radius: var(--radius-lg);
+        padding: 8px 12px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--neutral-700);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+    }
+    .language-dropdown:hover {
+        border-color: var(--primary-300);
+        background: rgba(255,255,255,1);
+    }
+    .language-dropdown:focus {
+        outline: none;
+        border-color: var(--primary-400);
+        box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.1);
+    }
+    </style>
+    <script src="index.js"></script>
+    <script src="gsap-animations.js"></script>
+    <script src="auth-guard.js"></script>
+</body>
+</html>

@@ -1,0 +1,356 @@
+*<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Your Mental Wellness Journey</title>
+    <meta name="description" content="Your personalized mental health dashboard with AI support, mood tracking, and wellness tools.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="firebase-init.js"></script> 
+</head>
+<body class="dashboard-body">
+    <header class="header" id="dashboardHeader">
+        <div class="container">
+            <div class="logo" onclick="window.location.href='index.html'">
+                <div class="logo-img">M</div>
+                <span class="logo-text">Mental Wellness Hub</span>
+            </div>
+            <div class="dashboard-header-right">
+                <div class="user-greeting">
+                    <span class="greeting-text">Good morning, Sarah! </span>
+                    <span class="greeting-emoji">🌟</span>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-outline btn-small" onclick="window.location.href='chatbot.html'">
+                        🤖 AI Support
+                    </button>
+                    <button class="btn btn-accent btn-small" onclick="window.location.href='booking.html'">
+                        📅 Book Session
+                    </button>
+                </div>
+                <a href="profile.html" class="profile-section">
+    <div class="profile-avatar">
+        <img src="https://photosbull.com/wp-content/uploads/2024/05/no-dp_16.webp" alt="Profile" class="profile-img">
+        <div class="profile-status"></div>
+    </div>
+</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard-main">
+        <div class="container">
+            <section class="dashboard-welcome">
+                <div class="welcome-content">
+                    <h1 class="welcome-title">Your Wellness Dashboard</h1>
+                    <p class="welcome-subtitle">Track your progress, access support, and maintain your mental wellness journey</p>
+                </div>
+                <div class="welcome-stats">
+                    <div class="stat-card">
+                        <div class="stat-value" id="dayStreakValue">12</div>
+                        <div class="stat-label">Day Streak</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="moodScoreValue">85%</div>
+                        <div class="stat-label">Mood Score</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="sessionsValue">4</div>
+                        <div class="stat-label">Sessions</div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="dashboard-grid">
+                <div class="card dashboard-card">
+                    <div class="card-header">
+                        <h3>📊 Quick Mood Check</h3>
+                        <p>How are you feeling right now?</p>
+                    </div>
+                    <div class="mood-options">
+                        <button class="mood-btn" data-mood="joyful" title="Excellent">
+                            <span class="mood-emoji">😄</span>
+                        </button>
+                        <button class="mood-btn" data-mood="content" title="Good">
+                            <span class="mood-emoji">😊</span>
+                        </button>
+                        <button class="mood-btn" data-mood="neutral" title="Neutral">
+                            <span class="mood-emoji">😐</span>
+                        </button>
+                        <button class="mood-btn" data-mood="worried" title="Low">
+                            <span class="mood-emoji">😟</span>
+                        </button>
+                        <button class="mood-btn" data-mood="stressed" title="Anxious">
+                            <span class="mood-emoji">😰</span>
+                        </button>
+                    </div>
+                    <button class="btn btn-primary btn-small" onclick="window.location.href='mood-tracker.html'">
+                        Detailed Tracking
+                    </button>
+                </div>
+
+                <div class="card dashboard-card emergency-card">
+                    <div class="card-header">
+                        <h3>🆘 Emergency Support</h3>
+                        <p>Immediate help when you need it</p>
+                    </div>
+                    <div class="emergency-options">
+                        <button class="btn btn-accent btn-small" onclick="window.location.href='chatbot.html?emergency=true'">
+                            🤖 Crisis Chat
+                        </button>
+                        <button class="btn btn-secondary btn-small" onclick="callHelpline('988')">
+                            📞 Call 988
+                        </button>
+                    </div>
+                    <div class="emergency-info">
+                        <small>24/7 Crisis Text Line: Text HOME to 741741</small>
+                    </div>
+                </div>
+
+                <div class="card dashboard-card relief-card">
+                    <div class="card-header">
+                        <h3>🌱 Instant Relief</h3>
+                        <p>Quick tools for immediate support</p>
+                    </div>
+                    <div class="relief-grid">
+                        <button class="relief-btn" onclick="window.location.href='breathing-exercises.html'">
+                            <div class="relief-icon">🫁</div>
+                            <span>Breathing</span>
+                            <small>2-3 min</small>
+                        </button>
+                        <button class="relief-btn" onclick="window.location.href='sounds.html'">
+                            <div class="relief-icon">🎵</div>
+                            <span>Calming Sound</span>
+                            <small>Instant</small>
+                        </button>
+                        <button class="relief-btn" onclick="showAffirmation()">
+                            <div class="relief-icon">✨</div>
+                            <span>Affirmation</span>
+                            <small>Positive boost</small>
+                        </button>
+                        <button class="relief-btn" onclick="window.location.href='chatbot.html'">
+                            <div class="relief-icon">🤖</div>
+                            <span>AI Chat</span>
+                            <small>24/7 support</small>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card dashboard-card plan-card">
+                    <div class="card-header">
+                        <h3>📅 Today's Wellness Plan</h3>
+                        <p>Your personalized activities for today</p>
+                    </div>
+                    <div class="plan-list">
+                        <div class="plan-item completed">
+                            <div class="plan-time">9:00 AM</div>
+                            <div class="plan-content">
+                                <h4>Morning Meditation ✓</h4>
+                                <p>5-minute mindfulness session</p>
+                            </div>
+                            <div class="plan-status completed">Complete</div>
+                        </div>
+                        <div class="plan-item current">
+                            <div class="plan-time">2:00 PM</div>
+                            <div class="plan-content">
+                                <h4>Study Break</h4>
+                                <p>10-minute breathing exercise</p>
+                            </div>
+                            <button class="btn btn-accent btn-small plan-btn">Start Now</button>
+                        </div>
+                        <div class="plan-item">
+                            <div class="plan-time">8:00 PM</div>
+                            <div class="plan-content">
+                                <h4>Evening Reflection</h4>
+                                <p>Journal your thoughts and gratitude</p>
+                            </div>
+                            <button class="btn btn-outline btn-small plan-btn">Scheduled</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card dashboard-card progress-card">
+                    <div class="card-header">
+                        <h3>📈 Weekly Progress</h3>
+                        <p>Your mental wellness journey this week</p>
+                    </div>
+                    <div class="progress-stats">
+                        <div class="progress-item">
+                            <div class="progress-label">Mood Tracking</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 85%"></div>
+                            </div>
+                            <div class="progress-value">6/7 days</div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-label">Meditation Minutes</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 70%"></div>
+                            </div>
+                            <div class="progress-value">105/150 min</div>
+                        </div>
+                        <div class="progress-item">
+                            <div class="progress-label">AI Conversations</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 100%"></div>
+                            </div>
+                            <div class="progress-value">12 sessions</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-secondary btn-small" onclick="window.location.href='mood-tracker.html'">
+                        View Detailed Stats
+                    </button>
+                </div>
+
+                <div class="card dashboard-card resources-card">
+                    <div class="card-header">
+                        <h3>📚 Recommended for You</h3>
+                        <p>Evidence-based resources tailored to your needs</p>
+                    </div>
+                    <div class="resources-grid">
+                        <div class="resource-item">
+                            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Stress Management">
+                            <div class="resource-content">
+                                <h4>Managing Academic Stress</h4>
+                                <p>Evidence-based techniques to stay calm during exams</p>
+                                <div class="resource-meta">
+                                    <span class="duration">🕰️ 8 min read</span>
+                                    <span class="type">Article</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="resource-item">
+                            <img src="https://images.unsplash.com/photo-1540206458725-e34be856c28a?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Sleep Meditation">
+                            <div class="resource-content">
+                                <h4>Guided Sleep Meditation</h4>
+                                <p>Professional guided meditation for better sleep</p>
+                                <div class="resource-meta">
+                                    <span class="duration">🎧 15 min audio</span>
+                                    <span class="type">Meditation</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="resource-item">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80" alt="Relationships">
+                            <div class="resource-content">
+                                <h4>Building Healthy Relationships</h4>
+                                <p>Tips for meaningful connections and communication</p>
+                                <div class="resource-meta">
+                                    <span class="duration">🎥 12 min watch</span>
+                                    <span class="type">Video</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-small" onclick="window.location.href='resources.html'">
+                        Explore All Resources
+                    </button>
+                </div>
+
+                <div class="card dashboard-card screening-tools-card">
+                    <div class="card-header">
+                        <h3>📊 Screening Tools</h3>
+                        <p>Clinically validated mental health assessments</p>
+                    </div>
+                    <div class="screening-tools-grid">
+    <button class="screening-btn gad7" onclick="window.location.href='gad7.html'">
+        <div class="screening-icon">😰</div>
+        <div class="screening-content">
+            <h4>GAD-7 Test</h4>
+            <p>Anxiety Screening</p>
+        </div>
+    </button>
+    
+
+    <button class="screening-btn phq9" onclick="window.location.href='phq9.html'">
+        <div class="screening-icon">🧠</div>
+        <div class="screening-content">
+            <h4>PHQ-9 Test</h4>
+            <p>Depression Screening</p>
+        </div>
+    </button>
+</div>
+
+                </div>
+
+                <div class="card dashboard-card quick-actions-card">
+                    <div class="card-header">
+                        <h3>⚡ Quick Actions</h3>
+                        <p>Essential tools at your fingertips</p>
+                    </div>
+                    <div class="quick-actions-grid">
+                        <button class="action-btn" onclick="window.location.href='booking.html'">
+                            <div class="action-icon">👨‍⚕️</div>
+                            <span>Book Professional</span>
+                        </button>
+                        <button class="action-btn" onclick="window.location.href='community.html'">
+                            <div class="action-icon">👥</div>
+                            <span>Join Community</span>
+                        </button>
+                        <button class="action-btn" onclick="window.location.href='resources.html'">
+                            <div class="action-icon">📚</div>
+                            <span>Learning Center</span>
+                        </button>
+                        <button class="action-btn" onclick="exportProgress()">
+                            <div class="action-icon">📄</div>
+                            <span>Export Progress</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <div id="affirmationModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAffirmation()">&times;</span>
+            <h3>✨ Today's Positive Affirmation</h3>
+            <p id="affirmationText">You are capable, resilient, and worthy of happiness. Every small step forward is progress worth celebrating.</p>
+            <button class="btn btn-primary" onclick="closeAffirmation()">Thank you! 😊</button>
+        </div>
+    </div>
+
+    
+
+    <nav class="bottom-nav">
+        <a href="dashboard.html" class="nav-item">
+            <div class="nav-icon">🏠</div>
+            <span>Home</span>
+        </a>
+        <a href="chatbot.html" class="nav-item">
+            <div class="nav-icon">💬</div>
+            <span>Chat</span>
+        </a>
+        
+        <a href="breathing-exercises.html" class="nav-item">
+            <div class="nav-icon">🫁</div>
+            <span>Breath</span>
+        </a>
+        <a href="resources.html" class="nav-item">
+            <div class="nav-icon">🔍</div>
+            <span>Discover</span>
+        </a>
+        <a href="sounds.html" class="nav-item">
+            <div class="nav-icon">🎵</div>
+            <span>Sounds</span>
+        </a>
+        
+    </nav>
+
+    <script src="auth-guard.js"></script>
+    <script src="dashboard.js"></script>
+    <script src="gsap-animations.js"></script>
+</body>
+</html>
+*

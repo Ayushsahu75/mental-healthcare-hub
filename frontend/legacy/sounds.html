@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calming Sounds - Mental Wellness Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="sounds-body">
+    <header class="page-header">
+        <div class="container">
+            <button class="back-btn" onclick="window.location.href='dashboard.html'">← Back</button>
+            <h1>Calming Sounds</h1>
+            <div class="header-actions">
+                <button class="btn btn-secondary" onclick="showMixer()">Sound Mixer</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="sounds-main">
+        <div class="container">
+            <section class="sound-categories">
+                <div class="category-tabs">
+                    <button class="tab-btn active" data-category="nature">Nature</button>
+                    <button class="tab-btn" data-category="ambient">Ambient</button>
+                    <button class="tab-btn" data-category="meditation">Meditation</button>
+                </div>
+            </section>
+
+            <section class="sounds-grid">
+                <div class="sound-category" id="nature">
+                    <div class="sound-item">
+                        <div class="sound-card" data-sound-id="ocean">
+                            <div class="sound-icon">🌊</div>
+                            <h3>Ocean Waves</h3>
+                            <p>Gentle waves for relaxation</p>
+                            <div class="sound-controls">
+                                <button class="play-btn" data-sound="ocean">▶️</button>
+                                <div class="volume-control">
+                                    <input type="range" class="volume-slider" data-sound="ocean" min="0" max="100" value="0">
+                                </div>
+                            </div>
+                        </div>
+                        <audio id="audio-ocean" src="../data/ocean-waves.mp3" loop preload="auto"></audio>
+                    </div>
+
+                    <div class="sound-item">
+                        <div class="sound-card" data-sound-id="rain">
+                            <div class="sound-icon">🌧️</div>
+                            <h3>Rain</h3>
+                            <p>Soft rainfall for peace</p>
+                            <div class="sound-controls">
+                                <button class="play-btn" data-sound="rain">▶️</button>
+                                <div class="volume-control">
+                                    <input type="range" class="volume-slider" data-sound="rain" min="0" max="100" value="0">
+                                </div>
+                            </div>
+                        </div>
+                        <audio id="audio-rain" src="../data/rain.mp3" loop preload="auto"></audio>
+                    </div>
+
+                    <div class="sound-item">
+                        <div class="sound-card" data-sound-id="forest">
+                            <div class="sound-icon">🌲</div>
+                            <h3>Forest</h3>
+                            <p>Birds and wind in trees</p>
+                            <div class="sound-controls">
+                                <button class="play-btn" data-sound="forest">▶️</button>
+                                <div class="volume-control">
+                                    <input type="range" class="volume-slider" data-sound="forest" min="0" max="100" value="0">
+                                </div>
+                            </div>
+                        </div>
+                        <audio id="audio-forest" src="../data/forest.mp3" loop preload="auto"></audio>
+                    </div>
+
+                    <div class="sound-item">
+                        <div class="sound-card" data-sound-id="fire">
+                            <div class="sound-icon">🔥</div>
+                            <h3>Fireplace</h3>
+                            <p>Crackling fire warmth</p>
+                            <div class="sound-controls">
+                                <button class="play-btn" data-sound="fire">▶️</button>
+                                <div class="volume-control">
+                                    <input type="range" class="volume-slider" data-sound="fire" min="0" max="100" value="0">
+                                </div>
+                            </div>
+                        </div>
+                        <audio id="audio-fire" src="../data/fireplace.mp3" loop preload="auto"></audio>
+                    </div>
+                </div>
+
+                <div class="sound-category" id="ambient" style="display: none;">
+                    <div class="sound-item">
+                        <div class="sound-card" data-sound-id="ambient">
+                            <div class="sound-icon">🎵</div>
+                            <h3>Ambient Music</h3>
+                            <p>Soft instrumental melodies</p>
+                            <div class="sound-controls">
+                                <button class="play-btn" data-sound="ambient">▶️</button>
+                                <div class="volume-control">
+                                    <input type="range" class="volume-slider" data-sound="ambient" min="0" max="100" value="0">
+                                </div>
+                            </div>
+                        </div>
+                        <audio id="audio-ambient" src="../data/ambient-music.mp3" loop preload="auto"></audio>
+                    </div>
+
+                    <div class="sound-item">
+                        <div class="sound-card" data-sound-id="piano">
+                            <div class="sound-icon">🎼</div>
+                            <h3>Piano</h3>
+                            <p>Gentle piano notes</p>
+                            <div class="sound-controls">
+                                <button class="play-btn" data-sound="piano">▶️</button>
+                                <div class="volume-control">
+                                    <input type="range" class="volume-slider" data-sound="piano" min="0" max="100" value="0">
+                                </div>
+                            </div>
+                        </div>
+                        <audio id="audio-piano" src="../data/piano.mp3" loop preload="auto"></audio>
+                    </div>
+                </div>
+
+                <div class="sound-category" id="meditation" style="display: none;">
+                    <div class="sound-item">
+                        <div class="sound-card" data-sound-id="singing-bowl">
+                            <div class="sound-icon">🕉️</div>
+                            <h3>Singing Bowl</h3>
+                            <p>Tibetan bowl vibrations</p>
+                            <div class="sound-controls">
+                                <button class="play-btn" data-sound="singing-bowl">▶️</button>
+                                <div class="volume-control">
+                                    <input type="range" class="volume-slider" data-sound="singing-bowl" min="0" max="100" value="0">
+                                </div>
+                            </div>
+                        </div>
+                        <audio id="audio-singing-bowl" src="../data/singing-bowl.mp3" loop preload="auto"></audio>
+                    </div>
+
+                    <div class="sound-item">
+                        <div class="sound-card" data-sound-id="bell">
+                            <div class="sound-icon">🧘</div>
+                            <h3>Meditation Bell</h3>
+                            <p>Gentle bell tones</p>
+                            <div class="sound-controls">
+                                <button class="play-btn" data-sound="bell">▶️</button>
+                                <div class="volume-control">
+                                    <input type="range" class="volume-slider" data-sound="bell" min="0" max="100" value="0">
+                                </div>
+                            </div>
+                        </div>
+                        <audio id="audio-bell" src="../data/meditation-bell.mp3" loop preload="auto"></audio>
+                    </div>
+                </div>
+            </section>
+
+            <section class="timer-section">
+                <div class="timer-card">
+                    <h3>Sleep Timer</h3>
+                    <p>Automatically stop sounds after</p>
+                    <div class="timer-options">
+                        <button class="timer-btn" data-minutes="15">15 min</button>
+                        <button class="timer-btn" data-minutes="30">30 min</button>
+                        <button class="timer-btn" data-minutes="60">1 hour</button>
+                        <button class="timer-btn" data-minutes="120">2 hours</button>
+                        <button class="timer-btn active" data-minutes="0">No timer</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div class="floating-player" id="floatingPlayer" style="display: none;">
+        <div class="player-info">
+            <div class="player-icon" id="playerIcon"></div>
+            <div class="player-details">
+                <h4 id="playerTitle"></h4>
+                <p id="playerTimer">No Timer</p>
+            </div>
+        </div>
+        <div class="player-controls">
+            <button class="player-btn" id="playerPlayBtn" onclick="toggleAllPlayback()">⏸️</button>
+            <button class="player-btn" onclick="stopAllSounds()">⏹️</button>
+        </div>
+    </div>
+
+    <div id="soundMixerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeMixer()">&times;</span>
+            <h3>Sound Mixer</h3>
+            <p>Create your perfect ambient mix (Total volume must equal 100%)</p>
+            
+            <div class="mixer-grid">
+                </div>
+            
+            <div class="mixer-controls">
+                <button class="btn btn-primary" onclick="playMix()">Play Mix</button>
+                <button class="btn btn-secondary" onclick="saveMix()">Save Mix</button>
+            </div>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="dashboard.html" class="nav-item">
+            <div class="nav-icon">🏠</div>
+            <span>Home</span>
+        </a>
+        <a href="chatbot.html" class="nav-item">
+            <div class="nav-icon">💬</div>
+            <span>Chat</span>
+        </a>
+        
+        <a href="breathing-exercises.html" class="nav-item">
+            <div class="nav-icon">🫁</div>
+            <span>Breath</span>
+        </a>
+        <a href="resources.html" class="nav-item">
+            <div class="nav-icon">🔍</div>
+            <span>Discover</span>
+        </a>
+        <a href="sounds.html" class="nav-item">
+            <div class="nav-icon">🎵</div>
+            <span>Sounds</span>
+        </a>
+        
+    </nav>
+
+    <script src="auth-guard.js"></script>
+    <script src="sounds.js"></script>
+</body>
+</html>
