@@ -1,0 +1,36 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Ensure all data in the 'users' collection can only be read/written by the owner
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Appointments Collection Rules
+    match /appointments/{appointmentId} {
+      
+      // 1. CREATE (Booking): Allow the write operation if the user is authenticated (logged in).
+      allow create: if request.auth != null; 
+      
+      // 2. READ/UPDATE/DELETE: Only allow the user who owns the appointment to manage it.
+      allow read, update, delete: if request.auth != null && request.auth.uid == resource.data.userId;
+    }
+    // Rule for the 'moods' collection
+    match /moods/{moodId} {
+      // 1. Allow a user to CREATE a mood entry only if they are logged in 
+      // AND the userId they submit matches their own UID.
+      allow create: if request.auth != null && request.resource.data.userId == request.auth.uid;
+
+      // 2. Allow a user to READ, UPDATE, or DELETE a mood entry only if 
+      // they are logged in AND the stored userId matches their own UID.
+      allow read, update, delete: if request.auth != null && resource.data.userId == request.auth.uid;
+    }
+    
+    // Optional: Rule for the 'users' collection (used for user profiles)
+    match /users/{userId} {
+      allow read, update, delete: if request.auth != null && request.auth.uid == userId;
+      allow create: if request.auth != null; 
+    }
+  }
+}
