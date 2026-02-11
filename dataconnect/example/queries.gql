@@ -1,0 +1,42 @@
+mutation CreateSupportGroup($name: String!, $description: String!, $imageUrl: String, $rules: String) @auth(level: USER) {
+  supportGroup_insert(data: {
+    name: $name,
+    description: $description,
+    imageUrl: $imageUrl,
+    rules: $rules,
+    createdAt_expr: "request.time"
+  })
+}
+
+query GetSupportGroup($id: UUID!) @auth(level: PUBLIC, insecureReason: "This operation is safe to expose to the public") {
+  supportGroup(id: $id) {
+    id
+    name
+    description
+    imageUrl
+    rules
+    createdAt
+  }
+}
+
+mutation CreateMoodEntry($date: Date!, $moodLevel: Int!, $briefNote: String) @auth(level: USER) {
+  moodEntry_insert(data: {
+    userId_expr: "auth.uid",
+    date: $date,
+    moodLevel: $moodLevel,
+    briefNote: $briefNote,
+    createdAt_expr: "request.time"
+  })
+}
+
+query ListJournalEntries @auth(level: USER) {
+  journalEntries(where: {userId: {eq_expr: "auth.uid"}}) {
+    id
+    title
+    content
+    createdAt
+    updatedAt
+    privacyStatus
+    tags
+  }
+}
