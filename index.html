@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Wellness Hub - Your Digital Mental Health Companion</title>
+    <meta name="description" content="Transform your mental wellbeing with AI-powered support, professional counseling, and evidence-based wellness tools designed for modern life.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="frontend/legacy/styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%2338bdf8'/><text x='50' y='70' text-anchor='middle' font-size='60' font-weight='800' fill='white'>M</text></svg">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="frontend/legacy/firebase-init.js"></script>
+</head>
+<body class="index-body">
+    <header class="header" id="header">
+        <div class="container">
+            <div class="logo" onclick="window.location.href='index.html'">
+                <div class="logo-img">M</div>
+                <span class="logo-text" data-i18n="brand">Mental Wellness Hub</span>
+            </div>
+            <nav class="nav">
+                <a href="frontend/legacy/dashboard.html" class="nav-link">
+                    <span data-i18n="nav.dashboard">Dashboard</span>
+                </a>
+                <a href="frontend/legacy/chatbot.html" class="nav-link">
+                    <span data-i18n="nav.aiSupport">AI Support</span>
+                </a>
+                <a href="frontend/legacy/resources.html" class="nav-link">
+                    <span data-i18n="nav.resources">Resources</span>
+                </a>
+                <a href="frontend/legacy/booking.html" class="nav-link">
+                    <span data-i18n="nav.bookSession">Book Session</span>
+                </a>
+                <div class="language-selector">
+                    <select id="languageSelect" class="language-dropdown">
+                        <option value="en">English</option>
+                        <option value="hi">Hindi</option>
+                        <option value="ta">Tamil</option>
+                        <option value="te">Telugu</option>
+                        <option value="bn">Bengali</option>
+                    </select>
+                </div>
+                <a href="frontend/legacy/login.html" class="btn btn-primary btn-small">
+                    <span data-i18n="nav.getStarted">Get Started</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title" data-i18n="hero.title">Transform Your Mental Wellness Journey</h1>
+                <p class="hero-subtitle" data-i18n="hero.subtitle">Discover AI-powered support, professional counseling, and evidence-based wellness tools designed to help you thrive in every aspect of life.</p>
+                <div class="hero-buttons">
+                    <a href="frontend/legacy/chatbot.html" class="btn btn-primary btn-large">
+                        <span data-i18n="hero.startAi">Start AI Support</span>
+                    </a>
+                    <a href="frontend/legacy/dashboard.html" class="btn btn-secondary btn-large">
+                        <span data-i18n="hero.exploreDashboard">Explore Dashboard</span>
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <span class="hero-stat-number">10k+</span>
+                        <span class="hero-stat-label" data-i18n="stats.students">Students Helped</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-number">24/7</span>
+                        <span class="hero-stat-label" data-i18n="stats.ai">AI Support</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-number">95%</span>
+                        <span class="hero-stat-label" data-i18n="stats.satisfaction">Satisfaction Rate</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Mental Wellness Support - Professional Healthcare">
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title" data-i18n="features.title">Comprehensive Mental Health Support</h2>
+            <p style="text-align: center; max-width: 600px; margin: 0 auto var(--spacing-2xl) auto; color: var(--neutral-600); font-size: 1.125rem;" data-i18n="features.subtitle">Experience evidence-based mental health tools designed by professionals to support your wellbeing journey.</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">AI</div>
+                    <h3 data-i18n="features.ai.title">AI Wellness Assistant</h3>
+                    <p data-i18n="features.ai.body">Get instant, personalized support from our AI companion trained on evidence-based therapeutic approaches.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">DR</div>
+                    <h3 data-i18n="features.counseling.title">Professional Counseling</h3>
+                    <p data-i18n="features.counseling.body">Connect with licensed mental health professionals through secure, confidential video sessions.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">BR</div>
+                    <h3 data-i18n="features.mindfulness.title">Mindfulness Tools</h3>
+                    <p data-i18n="features.mindfulness.body">Access guided breathing exercises, meditation, and relaxation techniques for immediate stress relief.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">MD</div>
+                    <h3 data-i18n="features.mood.title">Mood Tracking</h3>
+                    <p data-i18n="features.mood.body">Monitor your emotional wellbeing with intelligent mood tracking and personalized insights.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">CP</div>
+                    <h3 data-i18n="features.community.title">Community Support</h3>
+                    <p data-i18n="features.community.body">Join a supportive community of peers navigating similar mental health challenges.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">PR</div>
+                    <h3 data-i18n="features.privacy.title">Complete Privacy</h3>
+                    <p data-i18n="features.privacy.body">Your mental health journey is completely private with enterprise-grade security and confidentiality.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="quick-access">
+        <div class="container">
+            <h2 style="color: white; text-align: center;" data-i18n="quick.title">Start Your Wellness Journey Today</h2>
+            <p style="text-align: center; max-width: 600px; margin: 0 auto var(--spacing-2xl) auto; color: var(--neutral-600); font-size: 1.125rem; color: white;" data-i18n="quick.subtitle">Choose the support that feels right for you - whether it's immediate relief or long-term care.</p>
+            <div class="quick-access-grid">
+                <a href="frontend/legacy/chatbot.html" class="quick-access-card">
+                    <div class="quick-icon">AI</div>
+                    <span data-i18n="quick.ai">AI Support Chat</span>
+                </a>
+                <a href="frontend/legacy/breathing-exercises.html" class="quick-access-card">
+                    <div class="quick-icon">BR</div>
+                    <span data-i18n="quick.breathing">Breathing Exercises</span>
+                </a>
+                <a href="frontend/legacy/mood-tracker.html" class="quick-access-card">
+                    <div class="quick-icon">MD</div>
+                    <span data-i18n="quick.mood">Track Your Mood</span>
+                </a>
+                <a href="frontend/legacy/booking.html" class="quick-access-card">
+                    <div class="quick-icon">DR</div>
+                    <span data-i18n="quick.book">Book Professional</span>
+                </a>
+                <a href="frontend/legacy/sounds.html" class="quick-access-card">
+                    <div class="quick-icon">MU</div>
+                    <span data-i18n="quick.sounds">Relaxation Sounds</span>
+                </a>
+                <a href="frontend/legacy/community.html" class="quick-access-card">
+                    <div class="quick-icon">CP</div>
+                    <span data-i18n="quick.community">Join Community</span>
+                </a>
+            </div>
+            <div style="text-align: center; margin-top: var(--spacing-2xl);">
+                <a href="frontend/legacy/dashboard.html" class="btn btn-accent btn-large">
+                    <span data-i18n="quick.cta">Get Started Now</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 data-i18n="footer.brandTitle">Mental Wellness Hub</h4>
+                    <p data-i18n="footer.brandBody">Empowering individuals with AI-driven mental health support, professional counseling, and evidence-based wellness tools for a healthier, more resilient life.</p>
+                    <div style="margin-top: var(--spacing-lg);">
+                        <a href="frontend/legacy/chatbot.html" class="btn btn-secondary btn-small" data-i18n="footer.tryAi">Try AI Support</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="footer.emergencyTitle">Emergency Support</h4>
+                    <p><strong>Crisis Helpline:</strong> 988</p>
+                    <p><strong>National Helpline:</strong> 1-800-599-0019</p>
+                    <p><strong>Text Support:</strong> Text HOME to 741741</p>
+                    <p style="font-size: 0.875rem; color: rgba(255,255,255,0.7);" data-i18n="footer.emergencyBody">Available 24/7 - You are not alone</p>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="footer.quickAccessTitle">Quick Access</h4>
+                    <a href="frontend/legacy/dashboard.html" data-i18n="nav.dashboard">Dashboard</a>
+                    <a href="frontend/legacy/booking.html" data-i18n="nav.bookSession">Book Session</a>
+                    <a href="frontend/legacy/resources.html" data-i18n="nav.resources">Resources</a>
+                    <a href="frontend/legacy/community.html" data-i18n="footer.community">Community</a>
+                    <a href="frontend/legacy/mood-tracker.html" data-i18n="footer.mood">Mood Tracker</a>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="footer.aboutTitle">About</h4>
+                    <a href="#" data-i18n="footer.privacyPolicy">Privacy Policy</a>
+                    <a href="#" data-i18n="footer.terms">Terms of Service</a>
+                    <a href="#" data-i18n="footer.accessibility">Accessibility</a>
+                    <a href="#" data-i18n="footer.contact">Contact Us</a>
+                    <a href="#" data-i18n="footer.providers">Healthcare Providers</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-i18n="footer.bottom">&copy; 2024 Mental Wellness Hub. All rights reserved. | Designed for better mental health.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.getElementById('header');
+            const languageSelect = document.getElementById('languageSelect');
+            const metaDescription = document.querySelector('meta[name="description"]');
+            const translations = {
+                en: {
+                    pageTitle: 'Mental Wellness Hub - Your Digital Mental Health Companion',
+                    metaDescription: 'Transform your mental wellbeing with AI-powered support, professional counseling, and evidence-based wellness tools designed for modern life.',
+                    brand: 'Mental Wellness Hub',
+                    'nav.dashboard': 'Dashboard',
+                    'nav.aiSupport': 'AI Support',
+                    'nav.resources': 'Resources',
+                    'nav.bookSession': 'Book Session',
+                    'nav.getStarted': 'Get Started',
+                    'hero.title': 'Transform Your Mental Wellness Journey',
+                    'hero.subtitle': 'Discover AI-powered support, professional counseling, and evidence-based wellness tools designed to help you thrive in every aspect of life.',
+                    'hero.startAi': 'Start AI Support',
+                    'hero.exploreDashboard': 'Explore Dashboard',
+                    'stats.students': 'Students Helped',
+                    'stats.ai': 'AI Support',
+                    'stats.satisfaction': 'Satisfaction Rate',
+                    'features.title': 'Comprehensive Mental Health Support',
+                    'features.subtitle': 'Experience evidence-based mental health tools designed by professionals to support your wellbeing journey.',
+                    'features.ai.title': 'AI Wellness Assistant',
+                    'features.ai.body': 'Get instant, personalized support from our AI companion trained on evidence-based therapeutic approaches.',
+                    'features.counseling.title': 'Professional Counseling',
+                    'features.counseling.body': 'Connect with licensed mental health professionals through secure, confidential video sessions.',
+                    'features.mindfulness.title': 'Mindfulness Tools',
+                    'features.mindfulness.body': 'Access guided breathing exercises, meditation, and relaxation techniques for immediate stress relief.',
+                    'features.mood.title': 'Mood Tracking',
+                    'features.mood.body': 'Monitor your emotional wellbeing with intelligent mood tracking and personalized insights.',
+                    'features.community.title': 'Community Support',
+                    'features.community.body': 'Join a supportive community of peers navigating similar mental health challenges.',
+                    'features.privacy.title': 'Complete Privacy',
+                    'features.privacy.body': 'Your mental health journey is completely private with enterprise-grade security and confidentiality.',
+                    'quick.title': 'Start Your Wellness Journey Today',
+                    'quick.subtitle': 'Choose the support that feels right for you - whether it\'s immediate relief or long-term care.',
+                    'quick.ai': 'AI Support Chat',
+                    'quick.breathing': 'Breathing Exercises',
+                    'quick.mood': 'Track Your Mood',
+                    'quick.book': 'Book Professional',
+                    'quick.sounds': 'Relaxation Sounds',
+                    'quick.community': 'Join Community',
+                    'quick.cta': 'Get Started Now',
+                    'footer.brandTitle': 'Mental Wellness Hub',
+                    'footer.brandBody': 'Empowering individuals with AI-driven mental health support, professional counseling, and evidence-based wellness tools for a healthier, more resilient life.',
+                    'footer.tryAi': 'Try AI Support',
+                    'footer.emergencyTitle': 'Emergency Support',
+                    'footer.emergencyBody': 'Available 24/7 - You are not alone',
+                    'footer.quickAccessTitle': 'Quick Access',
+                    'footer.community': 'Community',
+                    'footer.mood': 'Mood Tracker',
+                    'footer.aboutTitle': 'About',
+                    'footer.privacyPolicy': 'Privacy Policy',
+                    'footer.terms': 'Terms of Service',
+                    'footer.accessibility': 'Accessibility',
+                    'footer.contact': 'Contact Us',
+                    'footer.providers': 'Healthcare Providers',
+                    'footer.bottom': '&copy; 2024 Mental Wellness Hub. All rights reserved. | Designed for better mental health.'
+                },
+                hi: {
+                    pageTitle: 'मेंटल वेलनेस हब - आपका डिजिटल मानसिक स्वास्थ्य साथी',
+                    metaDescription: 'AI आधारित सहायता, प्रोफेशनल काउंसलिंग और प्रमाण-आधारित वेलनेस टूल्स के साथ अपने मानसिक स्वास्थ्य को बेहतर बनाएं।',
+                    brand: 'मेंटल वेलनेस हब',
+                    'nav.dashboard': 'डैशबोर्ड',
+                    'nav.aiSupport': 'AI सहायता',
+                    'nav.resources': 'संसाधन',
+                    'nav.bookSession': 'सेशन बुक करें',
+                    'nav.getStarted': 'शुरू करें',
+                    'hero.title': 'अपने मानसिक स्वास्थ्य सफर को बदलें',
+                    'hero.subtitle': 'AI सहायता, प्रोफेशनल काउंसलिंग और प्रमाण-आधारित वेलनेस टूल्स के साथ जीवन के हर हिस्से में बेहतर महसूस करें।',
+                    'hero.startAi': 'AI सहायता शुरू करें',
+                    'hero.exploreDashboard': 'डैशबोर्ड देखें',
+                    'stats.students': 'छात्रों की मदद',
+                    'stats.ai': 'AI सहायता',
+                    'stats.satisfaction': 'संतुष्टि दर',
+                    'features.title': 'समग्र मानसिक स्वास्थ्य सहायता',
+                    'features.subtitle': 'विशेषज्ञों द्वारा तैयार प्रमाण-आधारित मानसिक स्वास्थ्य टूल्स का अनुभव करें जो आपकी वेलनेस यात्रा को सपोर्ट करें।',
+                    'features.ai.title': 'AI वेलनेस असिस्टेंट',
+                    'features.ai.body': 'प्रमाण-आधारित थेरेपी तरीकों पर प्रशिक्षित हमारे AI साथी से तुरंत व्यक्तिगत सहायता प्राप्त करें।',
+                    'features.counseling.title': 'प्रोफेशनल काउंसलिंग',
+                    'features.counseling.body': 'सुरक्षित और गोपनीय वीडियो सेशन के माध्यम से लाइसेंस प्राप्त मानसिक स्वास्थ्य विशेषज्ञों से जुड़ें।',
+                    'features.mindfulness.title': 'माइंडफुलनेस टूल्स',
+                    'features.mindfulness.body': 'तुरंत तनाव कम करने के लिए गाइडेड ब्रीदिंग, मेडिटेशन और रिलैक्सेशन तकनीकों का उपयोग करें।',
+                    'features.mood.title': 'मूड ट्रैकिंग',
+                    'features.mood.body': 'इंटेलिजेंट ट्रैकिंग और पर्सनल इनसाइट्स के साथ अपने भावनात्मक स्वास्थ्य को मॉनिटर करें।',
+                    'features.community.title': 'कम्युनिटी सपोर्ट',
+                    'features.community.body': 'ऐसे लोगों के सहयोगी समुदाय से जुड़ें जो समान मानसिक स्वास्थ्य चुनौतियों से गुजर रहे हैं।',
+                    'features.privacy.title': 'पूर्ण गोपनीयता',
+                    'features.privacy.body': 'आपकी मानसिक स्वास्थ्य यात्रा पूरी तरह निजी है और एंटरप्राइज-ग्रेड सुरक्षा से सुरक्षित है।',
+                    'quick.title': 'आज ही अपनी वेलनेस यात्रा शुरू करें',
+                    'quick.subtitle': 'जो सहायता आपके लिए सही लगे उसे चुनें, चाहे वह तुरंत राहत हो या लंबे समय की देखभाल।',
+                    'quick.ai': 'AI सहायता चैट',
+                    'quick.breathing': 'ब्रीदिंग एक्सरसाइज',
+                    'quick.mood': 'अपना मूड ट्रैक करें',
+                    'quick.book': 'विशेषज्ञ बुक करें',
+                    'quick.sounds': 'रिलैक्सेशन साउंड्स',
+                    'quick.community': 'कम्युनिटी से जुड़ें',
+                    'quick.cta': 'अभी शुरू करें',
+                    'footer.brandTitle': 'मेंटल वेलनेस हब',
+                    'footer.brandBody': 'AI आधारित मानसिक स्वास्थ्य सहायता, प्रोफेशनल काउंसलिंग और प्रमाण-आधारित वेलनेस टूल्स के साथ लोगों को बेहतर और अधिक मजबूत जीवन की ओर सशक्त बनाना।',
+                    'footer.tryAi': 'AI सहायता आज़माएं',
+                    'footer.emergencyTitle': 'आपातकालीन सहायता',
+                    'footer.emergencyBody': '24/7 उपलब्ध - आप अकेले नहीं हैं',
+                    'footer.quickAccessTitle': 'त्वरित पहुँच',
+                    'footer.community': 'कम्युनिटी',
+                    'footer.mood': 'मूड ट्रैकर',
+                    'footer.aboutTitle': 'जानकारी',
+                    'footer.privacyPolicy': 'प्राइवेसी पॉलिसी',
+                    'footer.terms': 'सेवा की शर्तें',
+                    'footer.accessibility': 'एक्सेसिबिलिटी',
+                    'footer.contact': 'संपर्क करें',
+                    'footer.providers': 'हेल्थकेयर प्रोवाइडर्स',
+                    'footer.bottom': '&copy; 2024 मेंटल वेलनेस हब. सर्वाधिकार सुरक्षित. | बेहतर मानसिक स्वास्थ्य के लिए तैयार किया गया।'
+                }
+            };
+
+            function applyLanguage(language) {
+                const selectedLanguage = translations[language] ? language : 'en';
+                const dictionary = translations[selectedLanguage];
+
+                document.documentElement.lang = selectedLanguage === 'hi' ? 'hi' : 'en';
+                document.title = dictionary.pageTitle;
+                if (metaDescription) {
+                    metaDescription.setAttribute('content', dictionary.metaDescription);
+                }
+
+                document.querySelectorAll('[data-i18n]').forEach((element) => {
+                    const key = element.getAttribute('data-i18n');
+                    if (!dictionary[key]) {
+                        return;
+                    }
+
+                    element.innerHTML = dictionary[key];
+                });
+
+                localStorage.setItem('preferred-language', selectedLanguage);
+                if (languageSelect) {
+                    languageSelect.value = selectedLanguage;
+                }
+            }
+
+            window.addEventListener('scroll', () => {
+                const currentScroll = window.pageYOffset;
+
+                if (currentScroll > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.feature-card, .quick-access-card').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+
+            document.querySelectorAll('.btn').forEach(btn => {
+                btn.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-2px)';
+                });
+
+                btn.addEventListener('mouseleave', function() {
+                    this.style.transform = '';
+                });
+            });
+
+            const heroStats = document.querySelectorAll('.hero-stat-number');
+            heroStats.forEach(stat => {
+                const finalValue = stat.textContent;
+                const numericValue = parseInt(finalValue.replace(/\D/g, ''));
+
+                if (!isNaN(numericValue) && numericValue > 0) {
+                    stat.textContent = '0';
+                    const increment = numericValue / 50;
+                    let current = 0;
+
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= numericValue) {
+                            stat.textContent = finalValue;
+                            clearInterval(timer);
+                        } else {
+                            stat.textContent = Math.floor(current) + finalValue.replace(/\d/g, '').slice(0, -1) + finalValue.slice(-1);
+                        }
+                    }, 20);
+                }
+            });
+
+            languageSelect?.addEventListener('change', function() {
+                applyLanguage(this.value);
+            });
+
+            const savedLanguage = localStorage.getItem('preferred-language') || 'en';
+            applyLanguage(savedLanguage);
+
+            console.log('Mental Wellness Hub loaded successfully!');
+        });
+    </script>
+
+    <style>
+    .language-selector {
+        margin-right: var(--spacing-md);
+    }
+    .language-dropdown {
+        background: rgba(255,255,255,0.9);
+        border: 2px solid rgba(255,255,255,0.3);
+        border-radius: var(--radius-lg);
+        padding: 8px 12px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--neutral-700);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+    }
+    .language-dropdown:hover {
+        border-color: var(--primary-300);
+        background: rgba(255,255,255,1);
+    }
+    .language-dropdown:focus {
+        outline: none;
+        border-color: var(--primary-400);
+        box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.1);
+    }
+    </style>
+    <script src="frontend/legacy/index.js"></script>
+</body>
+</html>

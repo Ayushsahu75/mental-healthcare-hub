@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resource Hub - Mental Wellness Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="resources-body">
+    <header class="page-header">
+        <div class="container">
+            <button class="back-btn" onclick="window.location.href='dashboard.html'">← Back</button>
+            <h1>Resource Hub</h1>
+            <div class="header-actions">
+                <div class="search-box">
+                    <input type="text" placeholder="Search resources..." id="resourceSearch">
+                    <button class="search-btn">🔍</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="resources-main">
+        <div class="container">
+            <section class="categories-section">
+                <div class="category-filters">
+                    <button class="filter-btn active" data-category="all">All</button>
+                    <button class="filter-btn" data-category="article">Articles</button>
+                    <button class="filter-btn" data-category="video">Videos</button>
+                    <button class="filter-btn" data-category="audio">Audio</button>
+                    <button class="filter-btn" data-category="guide">Guides</button>
+                </div>
+            </section>
+
+            <section class="featured-section">
+                <h2>Featured Resources</h2>
+                <div class="featured-grid">
+                    </div>
+            </section>
+
+            <section class="library-section">
+                <div class="library-header">
+                    <h2>Resource Library</h2>
+                    <div class="sort-options">
+                        <select class="sort-select">
+                            <option value="recent">Most Recent</option>
+                            <option value="popular">Most Popular</option>
+                            <option value="rating">Highest Rated</option>
+                            <option value="duration">Duration</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="resources-grid">
+                    </div>
+
+                <button class="btn btn-secondary btn-full">Load More Resources</button>
+            </section>
+
+            <section class="bookmarked-section">
+                <h2>Your Saved Resources</h2>
+                <div class="bookmarked-grid">
+                    </div>
+            </section>
+        </div>
+    </main>
+
+    <div id="resourcePlayerModal" class="modal">
+        <div class="modal-content resource-player" data-current-resource-id="">
+            <span class="close">&times;</span>
+            <div class="player-header">
+                <h3 id="playerTitle">Resource Title</h3>
+                <div class="player-meta">
+                    <span id="playerCategory">Category</span>
+                    <span id="playerDuration">Duration</span>
+                </div>
+            </div>
+            
+            <div class="player-content">
+                <div class="video-player" id="videoPlayer" style="display: none;">
+                    <iframe width="430" height="215" src="https://www.youtube.com/embed/61JECuu2oxU?si=cAEQCSqKw89z1iWd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                
+                <div class="audio-player" id="audioPlayer" style="display: none;">
+                    <div class="audio-visualizer">
+                        <div class="visualizer-bar"></div>
+                        <div class="visualizer-bar"></div>
+                        <div class="visualizer-bar"></div>
+                        <div class="visualizer-bar"></div>
+                        <div class="visualizer-bar"></div>
+                    </div>
+                    <audio controls>
+                        <source src="../data/Morning Mindfulness.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+                
+                <div class="article-content" id="articleContent" style="display: none;">
+                    <div class="article-text">
+                        <p>Article content will be displayed here...</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="player-actions">
+                <button class="btn btn-secondary" onclick="bookmarkResource(document.getElementById('resourcePlayerModal').querySelector('.modal-content').dataset.currentResourceId)">🔖 Bookmark</button>
+                <button class="btn btn-primary" onclick="shareResource()">📤 Share</button>
+            </div>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="dashboard.html" class="nav-item">
+            <div class="nav-icon">🏠</div>
+            <span>Home</span>
+        </a>
+        <a href="chatbot.html" class="nav-item">
+            <div class="nav-icon">💬</div>
+            <span>Chat</span>
+        </a>
+    
+        <a href="breathing-exercises.html" class="nav-item">
+            <div class="nav-icon">🫁</div>
+            <span>Breath</span>
+        </a>
+        <a href="resources.html" class="nav-item">
+            <div class="nav-icon">🔍</div>
+            <span>Discover</span>
+        </a>
+        <a href="sounds.html" class="nav-item">
+            <div class="nav-icon">🎵</div>
+            <span>Sounds</span>
+        </a>
+        
+    </nav>
+
+    <script src="auth-guard.js"></script>
+    <script src="resources.js"></script>
+</body>
+</html>

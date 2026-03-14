@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Support - Mental Wellness Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="./community.css">
+</head>
+<body class="community-body">
+    <!-- Header -->
+    <header class="page-header">
+        <div class="container">
+            <button class="back-btn" onclick="window.location.href='dashboard.html'">← Back</button>
+            <h1>Community Support</h1>
+            <div class="header-actions">
+                <button class="btn btn-primary" onclick="showCreatePost()">New Post</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="community-main">
+        <div class="container">
+            <!-- Community Stats -->
+            <section class="community-stats">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-info">
+                            <h3>1,247</h3>
+                            <p>Active Members</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">💬</div>
+                        <div class="stat-info">
+                            <h3>3,892</h3>
+                            <p>Support Messages</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🤝</div>
+                        <div class="stat-info">
+                            <h3>156</h3>
+                            <p>Peer Volunteers</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⭐</div>
+                        <div class="stat-info">
+                            <h3>4.9/5</h3>
+                            <p>Community Rating</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Community Guidelines -->
+            <section class="guidelines-section">
+                <div class="guidelines-card">
+                    <h3>Community Guidelines</h3>
+                    <div class="guidelines-list">
+                        <div class="guideline-item">
+                            <span class="guideline-icon">🤝</span>
+                            <span>Be supportive and empathetic</span>
+                        </div>
+                        <div class="guideline-item">
+                            <span class="guideline-icon">🔒</span>
+                            <span>Respect privacy and confidentiality</span>
+                        </div>
+                        <div class="guideline-item">
+                            <span class="guideline-icon">💬</span>
+                            <span>Use respectful language</span>
+                        </div>
+                        <div class="guideline-item">
+                            <span class="guideline-icon">🚫</span>
+                            <span>No harassment or discrimination</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Discussion Categories -->
+            <section class="categories-section">
+                <h2>Discussion Categories</h2>
+                <div class="categories-grid">
+                    <div class="category-card" data-category="general">
+                        <div class="category-icon">💭</div>
+                        <h3>General Support</h3>
+                        <p>Share experiences and get general support</p>
+                        <div class="category-stats">
+                            <span>342 posts</span>
+                            <span>24 active</span>
+                        </div>
+                    </div>
+                    <div class="category-card" data-category="academic">
+                        <div class="category-icon">📚</div>
+                        <h3>Academic Stress</h3>
+                        <p>Discuss study pressure and exam anxiety</p>
+                        <div class="category-stats">
+                            <span>189 posts</span>
+                            <span>18 active</span>
+                        </div>
+                    </div>
+                    <div class="category-card" data-category="relationships">
+                        <div class="category-icon">💕</div>
+                        <h3>Relationships</h3>
+                        <p>Friendship, family, and romantic relationships</p>
+                        <div class="category-stats">
+                            <span>156 posts</span>
+                            <span>12 active</span>
+                        </div>
+                    </div>
+                    <div class="category-card" data-category="anxiety">
+                        <div class="category-icon">😰</div>
+                        <h3>Anxiety & Panic</h3>
+                        <p>Coping with anxiety and panic attacks</p>
+                        <div class="category-stats">
+                            <span>234 posts</span>
+                            <span>31 active</span>
+                        </div>
+                    </div>
+                    <div class="category-card" data-category="depression">
+                        <div class="category-icon">💙</div>
+                        <h3>Depression Support</h3>
+                        <p>Support for dealing with depression</p>
+                        <div class="category-stats">
+                            <span>167 posts</span>
+                            <span>15 active</span>
+                        </div>
+                    </div>
+                    <div class="category-card" data-category="wellness">
+                        <div class="category-icon">🌟</div>
+                        <h3>Wellness Tips</h3>
+                        <p>Share and discover wellness strategies</p>
+                        <div class="category-stats">
+                            <span>278 posts</span>
+                            <span>22 active</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recent Posts -->
+            <section class="posts-section">
+                <div class="posts-header">
+                    <h2>Recent Posts</h2>
+                    <div class="filter-options">
+                        <select class="filter-select">
+                            <option value="recent">Most Recent</option>
+                            <option value="popular">Most Popular</option>
+                            <option value="trending">Trending</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="posts-list">
+                    <div class="post-card">
+                        <div class="post-header">
+                            <div class="post-author">
+                                <img src="https://via.placeholder.com/40x40/4F46E5/FFFFFF?text=A" alt="Author" class="author-avatar">
+                                <div class="author-info">
+                                    <h4>Alex (Anonymous)</h4>
+                                    <span class="post-time">2 hours ago</span>
+                                </div>
+                            </div>
+                            <div class="post-category">Academic Stress</div>
+                        </div>
+                        <div class="post-content">
+                            <h3>Feeling overwhelmed with finals</h3>
+                            <p>I have 4 exams next week and I'm starting to feel really anxious. Anyone have tips for managing exam stress?</p>
+                        </div>
+                        <div class="post-actions">
+                            <button class="action-btn like-btn">
+                                <span>👍</span>
+                                <span>12</span>
+                            </button>
+                            <button class="action-btn comment-btn">
+                                <span>💬</span>
+                                <span>8</span>
+                            </button>
+                            <button class="action-btn share-btn">
+                                <span>🔄</span>
+                                <span>Share</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="post-card">
+                        <div class="post-header">
+                            <div class="post-author">
+                                <img src="https://via.placeholder.com/40x40/4F46E5/FFFFFF?text=B" alt="Author" class="author-avatar">
+                                <div class="author-info">
+                                    <h4>Blake (Anonymous)</h4>
+                                    <span class="post-time">5 hours ago</span>
+                                </div>
+                            </div>
+                            <div class="post-category">Wellness Tips</div>
+                        </div>
+                        <div class="post-content">
+                            <h3>Morning routine that changed my life</h3>
+                            <p>Started doing 10 minutes of meditation and 5 minutes of journaling every morning. The difference is incredible! 🧘‍♀️</p>
+                        </div>
+                        <div class="post-actions">
+                            <button class="action-btn like-btn">
+                                <span>👍</span>
+                                <span>24</span>
+                            </button>
+                            <button class="action-btn comment-btn">
+                                <span>💬</span>
+                                <span>15</span>
+                            </button>
+                            <button class="action-btn share-btn">
+                                <span>🔄</span>
+                                <span>Share</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="post-card">
+                        <div class="post-header">
+                            <div class="post-author">
+                                <img src="https://via.placeholder.com/40x40/4F46E5/FFFFFF?text=C" alt="Author" class="author-avatar">
+                                <div class="author-info">
+                                    <h4>Casey (Anonymous)</h4>
+                                    <span class="post-time">1 day ago</span>
+                                </div>
+                            </div>
+                            <div class="post-category">Relationships</div>
+                        </div>
+                        <div class="post-content">
+                            <h3>Feeling lonely in college</h3>
+                            <p>It's my second year and I still haven't found my people. How do you make meaningful friendships in college?</p>
+                        </div>
+                        <div class="post-actions">
+                            <button class="action-btn like-btn">
+                                <span>👍</span>
+                                <span>18</span>
+                            </button>
+                            <button class="action-btn comment-btn">
+                                <span>💬</span>
+                                <span>22</span>
+                            </button>
+                            <button class="action-btn share-btn">
+                                <span>🔄</span>
+                                <span>Share</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-secondary btn-full">Load More Posts</button>
+            </section>
+
+            <!-- Peer Volunteers -->
+            <section class="volunteers-section">
+                <div class="section-header">
+                    <h2>Peer Support Volunteers</h2>
+                    <p>Meet our trained student volunteers who are here to help</p>
+                </div>
+                <div class="volunteers-grid">
+                    <div class="volunteer-card">
+                        <div class="volunteer-avatar">
+                            <img src="https://via.placeholder.com/80x80/4F46E5/FFFFFF?text=P" alt="Volunteer">
+                        </div>
+                        <h4>Priya</h4>
+                        <p class="volunteer-year">3rd Year Psychology</p>
+                        <div class="volunteer-specialties">
+                            <span class="specialty">Anxiety</span>
+                            <span class="specialty">Academic Stress</span>
+                        </div>
+                        <div class="volunteer-stats">
+                            <span>⭐ 4.9</span>
+                            <span>127 helped</span>
+                        </div>
+                        <button class="btn btn-outline">Chat</button>
+                    </div>
+
+                    <div class="volunteer-card">
+                        <div class="volunteer-avatar">
+                            <img src="https://via.placeholder.com/80x80/4F46E5/FFFFFF?text=R" alt="Volunteer">
+                        </div>
+                        <h4>Rahul</h4>
+                        <p class="volunteer-year">4th Year Social Work</p>
+                        <div class="volunteer-specialties">
+                            <span class="specialty">Relationships</span>
+                            <span class="specialty">Depression</span>
+                        </div>
+                        <div class="volunteer-stats">
+                            <span>⭐ 4.8</span>
+                            <span>89 helped</span>
+                        </div>
+                        <button class="btn btn-outline">Chat</button>
+                    </div>
+
+                    <div class="volunteer-card">
+                        <div class="volunteer-avatar">
+                            <img src="https://via.placeholder.com/80x80/4F46E5/FFFFFF?text=S" alt="Volunteer">
+                        </div>
+                        <h4>Sneha</h4>
+                        <p class="volunteer-year">2nd Year Counseling</p>
+                        <div class="volunteer-specialties">
+                            <span class="specialty">Wellness</span>
+                            <span class="specialty">Mindfulness</span>
+                        </div>
+                        <div class="volunteer-stats">
+                            <span>⭐ 4.9</span>
+                            <span>156 helped</span>
+                        </div>
+                        <button class="btn btn-outline">Chat</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Create Post Modal -->
+    <div id="createPostModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Create New Post</h3>
+            
+            <form class="create-post-form">
+                <div class="form-group">
+                    <label for="postTitle">Title</label>
+                    <input type="text" id="postTitle" placeholder="What's on your mind?" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="postCategory">Category</label>
+                    <select id="postCategory" required>
+                        <option value="">Select a category</option>
+                        <option value="general">General Support</option>
+                        <option value="academic">Academic Stress</option>
+                        <option value="relationships">Relationships</option>
+                        <option value="anxiety">Anxiety & Panic</option>
+                        <option value="depression">Depression Support</option>
+                        <option value="wellness">Wellness Tips</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="postContent">Content</label>
+                    <textarea id="postContent" placeholder="Share your thoughts, ask for advice, or offer support..." rows="5" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="anonymousPost" checked>
+                        <span class="checkmark"></span>
+                        Post anonymously
+                    </label>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeCreatePost()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Post</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="dashboard.html" class="nav-item">
+            <div class="nav-icon">🏠</div>
+            <span>Home</span>
+        </a>
+        <a href="chatbot.html" class="nav-item">
+            <div class="nav-icon">💬</div>
+            <span>Chat</span>
+        </a>
+    
+        <a href="breathing-exercises.html" class="nav-item">
+            <div class="nav-icon">🫁</div>
+            <span>Breath</span>
+        </a>
+        <a href="resources.html" class="nav-item">
+            <div class="nav-icon">🔍</div>
+            <span>Discover</span>
+        </a>
+        <a href="sounds.html" class="nav-item">
+            <div class="nav-icon">🎵</div>
+            <span>Sounds</span>
+        </a>
+        
+    </nav>
+
+    <script src="auth-guard.js"></script>
+    <script src="community.js"></script>
+</body>
+</html>

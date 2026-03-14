@@ -1,0 +1,58 @@
+type User @table {
+  displayName: String!
+  email: String!
+  createdAt: Timestamp!
+  photoUrl: String
+  bio: String
+  privacySettings: String
+}
+
+type MoodEntry @table {
+  user: User
+  date: Date!
+  moodLevel: Int!
+  createdAt: Timestamp!
+  briefNote: String
+}
+
+type JournalEntry @table {
+  user: User
+  title: String!
+  content: String!
+  createdAt: Timestamp!
+  tags: [String]
+  privacyStatus: String
+  updatedAt: Timestamp
+}
+
+type SupportGroup @table {
+  name: String!
+  description: String!
+  createdAt: Timestamp!
+  imageUrl: String
+  rules: String
+}
+
+type GroupMembership @table(key: ["user", "supportGroup"]) {
+  user: User!
+  supportGroup: SupportGroup!
+  joinedAt: Timestamp!
+  role: String!
+}
+
+type GroupPost @table {
+  user: User
+  supportGroup: SupportGroup
+  content: String!
+  createdAt: Timestamp!
+  imageUrl: String
+  updatedAt: Timestamp
+}
+
+type Comment @table {
+  user: User
+  groupPost: GroupPost
+  content: String!
+  createdAt: Timestamp!
+  updatedAt: Timestamp
+}

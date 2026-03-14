@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breathing Exercises - Mental Wellness Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="breathing-body">
+    <!-- Header -->
+    <header class="page-header">
+        <div class="container">
+            <button class="back-btn" onclick="window.location.href='dashboard.html'">← Back</button>
+            <h1>Breathing Exercises</h1>
+            <div class="header-actions">
+                <button class="btn btn-secondary" onclick="showBreathingGuide()">Guide</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="breathing-main">
+        <div class="container">
+            <!-- Exercise Selection -->
+            <section class="exercise-selection">
+                <div class="section-header">
+                    <h2>Choose Your Breathing Exercise</h2>
+                    <p>Different techniques for different needs</p>
+                </div>
+                
+                <div class="exercise-grid">
+                    <div class="exercise-card" data-exercise="box-breathing">
+                        <div class="exercise-icon">📦</div>
+                        <h3>Box Breathing</h3>
+                        <p>Perfect for anxiety and stress relief</p>
+                        <div class="exercise-details">
+                            <span class="duration">4 minutes</span>
+                            <span class="difficulty">Beginner</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="startExercise('box-breathing')">Start</button>
+                    </div>
+
+                    <div class="exercise-card" data-exercise="4-7-8-breathing">
+                        <div class="exercise-icon">🌙</div>
+                        <h3>4-7-8 Breathing</h3>
+                        <p>Great for sleep and relaxation</p>
+                        <div class="exercise-details">
+                            <span class="duration">3 minutes</span>
+                            <span class="difficulty">Beginner</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="startExercise('4-7-8-breathing')">Start</button>
+                    </div>
+
+                    <div class="exercise-card" data-exercise="belly-breathing">
+                        <div class="exercise-icon">🫁</div>
+                        <h3>Belly Breathing</h3>
+                        <p>Deep breathing for calm and focus</p>
+                        <div class="exercise-details">
+                            <span class="duration">5 minutes</span>
+                            <span class="difficulty">Beginner</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="startExercise('belly-breathing')">Start</button>
+                    </div>
+
+                    <div class="exercise-card" data-exercise="alternate-nostril">
+                        <div class="exercise-icon">🕉️</div>
+                        <h3>Alternate Nostril</h3>
+                        <p>Balancing and centering technique</p>
+                        <div class="exercise-details">
+                            <span class="duration">6 minutes</span>
+                            <span class="difficulty">Intermediate</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="startExercise('alternate-nostril')">Start</button>
+                    </div>
+
+                    <div class="exercise-card" data-exercise="coherent-breathing">
+                        <div class="exercise-icon">💗</div>
+                        <h3>Coherent Breathing</h3>
+                        <p>Heart rate variability optimization</p>
+                        <div class="exercise-details">
+                            <span class="duration">10 minutes</span>
+                            <span class="difficulty">Intermediate</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="startExercise('coherent-breathing')">Start</button>
+                    </div>
+
+                    <div class="exercise-card" data-exercise="emergency-breathing">
+                        <div class="exercise-icon">🚨</div>
+                        <h3>Emergency Breathing</h3>
+                        <p>Quick relief for panic attacks</p>
+                        <div class="exercise-details">
+                            <span class="duration">2 minutes</span>
+                            <span class="difficulty">Beginner</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="startExercise('emergency-breathing')">Start</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Breathing Exercise Modal -->
+    <div id="breathingModal" class="modal breathing-modal">
+        <div class="modal-content breathing-content">
+            <div class="breathing-header">
+                <h3 id="exerciseTitle">Box Breathing</h3>
+                <button class="close-btn" onclick="closeBreathingExercise()">&times;</button>
+            </div>
+            
+            <div class="breathing-visual">
+                <div class="breathing-circle" id="breathingCircle">
+                    <div class="circle-content">
+                        <div class="breathing-text" id="breathingText">Ready to begin</div>
+                        <div class="breathing-timer" id="breathingTimer">00:00</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="breathing-instructions" id="breathingInstructions">
+                <h4>Instructions:</h4>
+                <ol>
+                    <li>Breathe in slowly for 4 seconds</li>
+                    <li>Hold your breath for 4 seconds</li>
+                    <li>Breathe out slowly for 4 seconds</li>
+                    <li>Hold empty for 4 seconds</li>
+                    <li>Repeat the cycle</li>
+                </ol>
+            </div>
+            
+            <div class="breathing-controls">
+                <button class="btn btn-secondary" id="pauseBtn" onclick="pauseExercise()">Pause</button>
+                <button class="btn btn-primary" id="startBtn" onclick="startBreathingCycle()">Start</button>
+                <button class="btn btn-danger" onclick="stopExercise()">Stop</button>
+            </div>
+            
+            <div class="breathing-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <span class="progress-text" id="progressText">0% Complete</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Breathing Widget -->
+    <div class="quick-breathing-widget">
+        <button class="quick-breath-btn" onclick="quickBreathing()">
+            <div class="quick-icon">🫁</div>
+            <span>Quick Breath</span>
+        </button>
+    </div>
+
+    <!-- Breathing Guide Modal -->
+    <div id="breathingGuideModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Breathing Exercise Guide</h3>
+            
+            <div class="guide-section">
+                <h4>Why Breathing Exercises Help</h4>
+                <ul>
+                    <li>Activates the parasympathetic nervous system</li>
+                    <li>Reduces cortisol (stress hormone) levels</li>
+                    <li>Increases oxygen flow to the brain</li>
+                    <li>Promotes relaxation and calm</li>
+                    <li>Improves focus and concentration</li>
+                </ul>
+            </div>
+
+            <div class="guide-section">
+                <h4>Best Times to Practice</h4>
+                <ul>
+                    <li>Morning: Start your day with calm energy</li>
+                    <li>Before exams: Reduce anxiety and improve focus</li>
+                    <li>Before sleep: Prepare your mind for rest</li>
+                    <li>During stress: Immediate relief from overwhelming feelings</li>
+                    <li>Any time: Regular practice builds resilience</li>
+                </ul>
+            </div>
+
+            <div class="guide-section">
+                <h4>Tips for Success</h4>
+                <ul>
+                    <li>Find a quiet, comfortable space</li>
+                    <li>Sit or lie in a relaxed position</li>
+                    <li>Focus on your breathing, not perfection</li>
+                    <li>Start with shorter sessions and build up</li>
+                    <li>Be patient with yourself</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="dashboard.html" class="nav-item">
+            <div class="nav-icon">🏠</div>
+            <span>Home</span>
+        </a>
+        <a href="chatbot.html" class="nav-item">
+            <div class="nav-icon">💬</div>
+            <span>Chat</span>
+        </a>
+    
+        <a href="breathing-exercises.html" class="nav-item">
+            <div class="nav-icon">🫁</div>
+            <span>Breath</span>
+        </a>
+        <a href="resources.html" class="nav-item">
+            <div class="nav-icon">🔍</div>
+            <span>Discover</span>
+        </a>
+        <a href="sounds.html" class="nav-item">
+            <div class="nav-icon">🎵</div>
+            <span>Sounds</span>
+        </a>
+    
+        
+    </nav>
+    <script src="auth-guard.js"></script>
+    <script src="breathing-exercises.js"></script>
+</body>
+</html>

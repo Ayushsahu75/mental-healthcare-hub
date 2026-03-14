@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Audio Library - Mental Wellness Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+    
+    <style>
+        /* --- Custom Modal Styling --- */
+        :root {
+            /* Assuming primary color variable from your main CSS */
+            --color-primary: #6a5acd; 
+            --spacing-xl: 30px;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: none; /* Initially hidden */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.3s;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 25px 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            transform: scale(0.95);
+            transition: transform 0.3s;
+        }
+        
+        /* Show the modal content when the overlay is visible */
+        .modal-overlay.visible .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-content h4 {
+            margin-top: 0;
+            color: var(--color-primary); 
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .modal-content p {
+            margin-bottom: 20px;
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        .modal-content button {
+            background-color: var(--color-primary); 
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+
+        .modal-content button:hover {
+            background-color: #5544b8;
+        }
+        /* ------------------------------------------------ */
+    </style>
+</head>
+<body class="dashboard-body">
+    <header class="header">
+        <div class="container">
+            <div class="logo" onclick="window.location.href='index.html'">
+                <div class="logo-img">M</div>
+                <span class="logo-text">Mental Wellness Hub</span>
+            </div>
+            <div class="header-actions">
+                <button class="back-btn" onclick="history.back()">← Back</button>
+                <button class="btn btn-secondary btn-small" onclick="window.location.href='resources.html'">📚 Resources</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard-main">
+        <div class="container">
+            <section class="dashboard-welcome">
+                <div class="welcome-content">
+                    <h1 class="welcome-title">🎧 Audio Library</h1>
+                    <p class="welcome-subtitle">Meditation, sleep stories, and calming music for instant relief</p>
+                </div>
+                <div class="welcome-stats">
+                    <div class="stat-card"><div class="stat-value">80+</div><div class="stat-label">Tracks</div></div>
+                    <div class="stat-card"><div class="stat-value">10-30</div><div class="stat-label">Minutes</div></div>
+                </div>
+            </section>
+
+            <div class="dashboard-grid">
+                <div class="card dashboard-card">
+                    <div class="card-header">
+                        <h3>🧘 Guided Meditations</h3>
+                        <p>Short, effective sessions</p>
+                    </div>
+                    <div class="resources-grid">
+                        <div class="resource-item" onclick="play('10-min Mindfulness')"> 
+                            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=200&h=120&fit=crop" alt="Mindfulness">
+                            <div class="resource-content">
+                                <h4>10-min Mindfulness</h4>
+                                <p>Focus on breath and body</p>
+                                <div class="resource-meta"><span>10 min</span><span>EN/HI</span></div>
+                            </div>
+                        </div>
+                        <div class="resource-item" onclick="play('Loving Kindness')">
+                            <img src="https://images.unsplash.com/photo-1452570053594-1b985d6ea890?w=200&h=120&fit=crop" alt="Kindness">
+                            <div class="resource-content">
+                                <h4>Loving Kindness</h4>
+                                <p>Compassion for self and others</p>
+                                <div class="resource-meta"><span>12 min</span><span>EN/TN</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card dashboard-card">
+                    <div class="card-header">
+                        <h3>🌙 Sleep Stories</h3>
+                        <p>Drift into deep sleep</p>
+                    </div>
+                    <div class="resources-grid">
+                        <div class="resource-item" onclick="play('Forest Path')">
+                            <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=200&h=120&fit=crop" alt="Forest">
+                            <div class="resource-content">
+                                <h4>Forest Path</h4>
+                                <p>Gentle narration with ambient sounds</p>
+                                <div class="resource-meta"><span>25 min</span><span>EN</span></div>
+                            </div>
+                        </div>
+                        <div class="resource-item" onclick="play('Ocean Dream')">
+                            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=200&h=120&fit=crop" alt="Ocean">
+                            <div class="resource-content">
+                                <h4>Ocean Dream</h4>
+                                <p>Waves and soft music</p>
+                                <div class="resource-meta"><span>30 min</span><span>EN</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align:center;margin-top:var(--spacing-xl)">
+                <button class="btn btn-accent" onclick="window.location.href='sounds.html'">Try Calming Soundscapes</button>
+            </div>
+        </div>
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="dashboard.html" class="nav-item"><div class="nav-icon">🏠</div><span>Home</span></a>
+        <a href="chatbot.html" class="nav-item"><div class="nav-icon">💬</div><span>Chat</span></a>
+        <a href="breathing-exercises.html" class="nav-item"><div class="nav-icon">🫁</div><span>Breath</span></a>
+        <a href="resources.html" class="nav-item"><div class="nav-icon">🔍</div><span>Discover</span></a>
+        <a href="sounds.html" class="nav-item"><div class="nav-icon">🎵</div><span>Sounds</span></a>
+    </nav>
+    <script src="auth-guard.js"></script>
+    
+    <div id="audioModal" class="modal-overlay">
+        <div class="modal-content">
+            <h4 id="modalTitle">Now Playing:</h4>
+            
+            <audio id="audioPlayer" controls autoplay style="width: 100%; margin: 15px 0 20px;">
+                Your browser does not support the audio element.
+            </audio>
+            
+            <p id="modalMessage">Track file information will be shown here.</p>
+            <button onclick="closeModal()">Close Player</button>
+        </div>
+    </div>
+    <script>
+        // --- 1. Audio Source Mapping ---
+        // **IMPORTANT: Update these paths with the exact names of the MP3 files you download!**
+        const audioSources = {
+            '10-min Mindfulness': 'audio/mindfulness-10.mp3', 
+            'Loving Kindness': 'audio/loving-kindness.mp3',   
+            'Forest Path': 'audio/forest-path.mp3',           
+            'Ocean Dream': 'audio/ocean-dream.mp3'           
+        };
+
+        // --- 2. Play Function ---
+        function play(name) {
+            const modal = document.getElementById('audioModal');
+            const title = document.getElementById('modalTitle');
+            const message = document.getElementById('modalMessage');
+            const audioPlayer = document.getElementById('audioPlayer');
+            
+            const audioPath = audioSources[name];
+
+            if (audioPath) {
+                // Set the audio source and load it
+                audioPlayer.src = audioPath;
+                audioPlayer.load();
+                
+                // Attempt to start playback immediately (cures the manual start issue)
+                audioPlayer.play().then(() => {
+                    // Playback started successfully
+                    title.textContent = `Now Playing: ${name}`;
+                    // Corrected to show only the filename
+                    message.innerHTML = `Track file: **${audioPath.split('/').pop()}**`; 
+                    modal.style.display = 'flex';
+                }).catch(error => {
+                    // Playback failed (e.g., browser autoplay policy blocked it)
+                    console.error("Audio playback failed (Autoplay Blocked?):", error);
+                    title.textContent = `Ready to Play: ${name}`;
+                    message.innerHTML = `Playback requires interaction. Please press the play button.`;
+                    modal.style.display = 'flex';
+                });
+
+            } else {
+                alert(`Error: Audio file for "${name}" not found in map. Check the audioSources object and folder structure.`);
+            }
+        }
+
+        // --- 3. Close Modal Function ---
+        function closeModal() {
+            const modal = document.getElementById('audioModal');
+            const audioPlayer = document.getElementById('audioPlayer');
+            
+            // Crucial: Stop and reset the audio when the modal closes
+            audioPlayer.pause();
+            audioPlayer.currentTime = 0; 
+            
+            // Hide the custom modal
+            modal.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

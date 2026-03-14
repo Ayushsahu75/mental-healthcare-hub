@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chatbot - Mental Wellness Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .chatbot-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+            height: 600px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .chat-header {
+            background: linear-gradient(135deg, #4F46E5, #7C3AED);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .chat-header h1 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+        
+        .chat-header p {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #f8fafc;
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        .user-message {
+            justify-content: flex-end;
+        }
+        
+        .message-content {
+            max-width: 70%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            position: relative;
+        }
+        
+        .bot-message .message-content {
+            background: white;
+            color: #1e293b;
+            border-radius: 18px 18px 18px 4px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .user-message .message-content {
+            background: linear-gradient(135deg, #4F46E5, #7C3AED);
+            color: white;
+            border-radius: 18px 18px 4px 18px;
+        }
+        
+        .message-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        
+        .bot-message .message-avatar {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+        }
+        
+        .user-message .message-avatar {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+        }
+        
+        .message-time {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            margin-top: 5px;
+            text-align: right;
+        }
+        
+        .chat-input-container {
+            padding: 20px;
+            background: white;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .chat-input-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: flex-end;
+        }
+        
+        #chatInput {
+            flex: 1;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 12px 16px;
+            font-family: inherit;
+            font-size: 1rem;
+            resize: none;
+            min-height: 50px;
+            max-height: 120px;
+            transition: border-color 0.3s ease;
+        }
+        
+        #chatInput:focus {
+            outline: none;
+            border-color: #4F46E5;
+        }
+        
+        .send-btn {
+            background: linear-gradient(135deg, #4F46E5, #7C3AED);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 14px rgba(79, 70, 229, 0.3);
+        }
+        
+        .send-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(79, 70, 229, 0.4);
+        }
+        
+        .quick-responses {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        .quick-response-btn {
+            background: #f1f5f9;
+            border: 2px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 8px 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+        
+        .quick-response-btn:hover {
+            border-color: #4F46E5;
+            background: #f0fdf4;
+            color: #16a34a;
+        }
+        
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #64748b;
+            font-style: italic;
+        }
+        
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+        
+        .typing-dots span {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #4F46E5;
+            animation: typing 1.4s infinite ease-in-out;
+        }
+        
+        .typing-dots span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dots span:nth-child(2) { animation-delay: -0.16s; }
+        .typing-dots span:nth-child(3) { animation-delay: 0s; }
+        
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0); opacity: 0.5; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+        
+        .welcome-message {
+            text-align: center;
+            color: #64748b;
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="chatbot-container">
+        <div class="chat-header">
+            <h1>🤖 AI Wellness Assistant</h1>
+            <p>I'm here to support your mental wellness journey</p>
+            <button onclick="showAPIKeyModal()" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 8px 16px; border-radius: 20px; cursor: pointer; margin-top: 10px; font-size: 0.9rem;">
+                🚀 Activate AI Mode
+            </button>
+            <div class="ai-status" style="margin-top: 10px; font-size: 0.8rem; opacity: 0.9;">💬 Basic Mode</div>
+        </div>
+        
+        <div class="chat-messages" id="chatMessages">
+            <div class="welcome-message">
+                <h3>Welcome to your AI Wellness Assistant!</h3>
+                <p>I'm here to help you with anxiety, stress, sleep issues, study problems, or just listen to what's on your mind.</p>
+                <p><strong>🚀 For advanced AI responses:</strong> Click "Activate AI Mode" above and enter your free GroqCloud API key.</p>
+                <p><strong>💬 Basic mode:</strong> I'll provide helpful responses using my built-in knowledge.</p>
+            </div>
+        </div>
+        
+        <div class="chat-input-container">
+            <div class="chat-input-wrapper">
+                <textarea id="chatInput" placeholder="Type your message here..." rows="1"></textarea>
+                <button class="send-btn" onclick="sendMessage()">Send</button>
+            </div>
+            
+            <div class="quick-responses">
+                <button class="quick-response-btn" onclick="sendQuickResponse('I feel anxious')">I feel anxious</button>
+                <button class="quick-response-btn" onclick="sendQuickResponse('I need help with stress')">I need help with stress</button>
+                <button class="quick-response-btn" onclick="sendQuickResponse('I feel sad')">I feel sad</button>
+                <button class="quick-response-btn" onclick="sendQuickResponse('I have sleep issues')">Sleep issues</button>
+                <button class="quick-response-btn" onclick="sendQuickResponse('I need study tips')">Study tips</button>
+                <button class="quick-response-btn" onclick="sendQuickResponse('Help me relax')">Help me relax</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class AIChatbot {
+            constructor() {
+                this.conversationHistory = [];
+                this.apiKey = null; // Will be set by user
+                this.isAIMode = false;
+                this.fallbackResponses = {
+                    "greeting": [
+                        "Hello! I'm your AI wellness assistant. How can I help you today?",
+                        "Hi there! I'm here to support your mental wellness. What's on your mind?",
+                        "Welcome! I'm ready to help you with any concerns or questions you have."
+                    ],
+                    "anxiety": [
+                        "I understand you're feeling anxious. This is completely normal, especially for students. Would you like to try some breathing exercises or relaxation techniques?",
+                        "Anxiety can be overwhelming, but remember that these feelings are temporary. Let's work through some coping strategies together.",
+                        "It's okay to feel anxious. I'm here to help you find ways to manage these feelings. What specific situation is causing you stress?"
+                    ],
+                    "stress": [
+                        "Stress is a common experience, especially during academic life. Let's explore some stress management techniques that might help.",
+                        "I hear that you're feeling stressed. Remember to take breaks and practice self-care. What's been particularly challenging lately?",
+                        "Stress can affect both your mental and physical health. Let's work on some strategies to help you feel more balanced."
+                    ],
+                    "sad": [
+                        "I'm sorry to hear you're feeling sad. It's important to acknowledge these feelings and know that you're not alone.",
+                        "Feeling sad is a valid emotion. Sometimes talking about what's bothering us can help. Would you like to share more?",
+                        "It's okay to feel down sometimes. Remember that these feelings are temporary and there are people who care about you."
+                    ],
+                    "sleep": [
+                        "Sleep issues can really impact your mental health. Let's explore some strategies to improve your sleep quality.",
+                        "Poor sleep can make everything feel more difficult. I can help you with some relaxation techniques before bedtime.",
+                        "Sleep is crucial for your wellbeing. What's been keeping you up at night? Let's work on some solutions together."
+                    ],
+                    "study": [
+                        "Academic pressure is very common among students. Let's discuss some study strategies and stress management techniques.",
+                        "Balancing studies with self-care is important. What specific academic challenges are you facing?",
+                        "It's normal to feel overwhelmed with studies. Let's work on some time management and study techniques that might help."
+                    ],
+                    "help": [
+                        "I'm here to help! I can assist you with breathing exercises, stress management, study tips, or just listen to what's on your mind.",
+                        "I'm ready to support you in any way I can. What would be most helpful for you right now?",
+                        "I'm here to provide guidance and support. Whether it's anxiety, stress, sleep issues, or academic concerns, I'm ready to help."
+                    ],
+                    "default": [
+                        "I understand you're going through something. I'm here to listen and help. Could you tell me more about what you're experiencing?",
+                        "I'm here to support you. Feel free to share what's on your mind, and we can work through it together.",
+                        "Thank you for sharing with me. I'm ready to help you with whatever you're facing. What would be most helpful right now?"
+                    ]
+                };
+            }
+            
+            async getAIResponse(userInput) {
+                if (!this.isAIMode || !this.apiKey) {
+                    return this.getFallbackResponse(userInput);
+                }
+                
+                try {
+                    // Add user message to conversation
+                    this.conversationHistory.push({ role: "user", content: userInput });
+                    
+                    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${this.apiKey}`,
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            model: 'llama-3.1-8b-instant',
+                            messages: [
+                                {
+                                    role: "system",
+                                    content: "You are a compassionate AI wellness assistant specializing in mental health support for students. Provide empathetic, helpful, and professional responses. Focus on coping strategies, stress management, anxiety relief, sleep improvement, and academic support. Always encourage seeking professional help when needed."
+                                },
+                                ...this.conversationHistory
+                            ],
+                            max_tokens: 1000,
+                            temperature: 0.7,
+                            top_p: 0.9
+                        })
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error(`API Error: ${response.status}`);
+                    }
+                    
+                    const data = await response.json();
+                    const aiResponse = data.choices[0].message.content;
+                    
+                    // Add AI response to conversation
+                    this.conversationHistory.push({ role: "assistant", content: aiResponse });
+                    
+                    return aiResponse;
+                    
+                } catch (error) {
+                    console.error('AI API Error:', error);
+                    return this.getFallbackResponse(userInput);
+                }
+            }
+            
+            getFallbackResponse(userInput) {
+                const userInputLower = userInput.toLowerCase();
+                
+                let category = "default";
+                
+                if (userInputLower.includes('hello') || userInputLower.includes('hi') || userInputLower.includes('hey')) {
+                    category = "greeting";
+                } else if (userInputLower.includes('anxious') || userInputLower.includes('anxiety') || userInputLower.includes('worried')) {
+                    category = "anxiety";
+                } else if (userInputLower.includes('stressed') || userInputLower.includes('stress') || userInputLower.includes('overwhelmed')) {
+                    category = "stress";
+                } else if (userInputLower.includes('sad') || userInputLower.includes('depressed') || userInputLower.includes('down')) {
+                    category = "sad";
+                } else if (userInputLower.includes('sleep') || userInputLower.includes('insomnia') || userInputLower.includes('tired')) {
+                    category = "sleep";
+                } else if (userInputLower.includes('study') || userInputLower.includes('exam') || userInputLower.includes('academic')) {
+                    category = "study";
+                } else if (userInputLower.includes('help') || userInputLower.includes('support')) {
+                    category = "help";
+                }
+                
+                const responses = this.fallbackResponses[category];
+                return responses[Math.floor(Math.random() * responses.length)];
+            }
+            
+            setAPIKey(apiKey) {
+                this.apiKey = apiKey;
+                this.isAIMode = true;
+            }
+            
+            clearConversation() {
+                this.conversationHistory = [];
+            }
+        }
+        
+        const chatbot = new AIChatbot();
+        
+        function addMessage(content, isUser = false) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+            
+            const avatar = isUser ? '👤' : '🤖';
+            const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            
+            messageDiv.innerHTML = `
+                <div class="message-avatar">${avatar}</div>
+                <div class="message-content">
+                    <div>${content}</div>
+                    <div class="message-time">${time}</div>
+                </div>
+            `;
+            
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        function showTypingIndicator() {
+            const chatMessages = document.getElementById('chatMessages');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message bot-message';
+            typingDiv.id = 'typingIndicator';
+            
+            typingDiv.innerHTML = `
+                <div class="message-avatar">🤖</div>
+                <div class="message-content">
+                    <div class="typing-indicator">
+                        <span>AI is typing</span>
+                        <div class="typing-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            chatMessages.appendChild(typingDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        function hideTypingIndicator() {
+            const typingIndicator = document.getElementById('typingIndicator');
+            if (typingIndicator) {
+                typingIndicator.remove();
+            }
+        }
+        
+        async function sendMessage() {
+            const chatInput = document.getElementById('chatInput');
+            const message = chatInput.value.trim();
+            
+            if (!message) return;
+            
+            // Add user message
+            addMessage(message, true);
+            
+            // Clear input
+            chatInput.value = '';
+            chatInput.style.height = 'auto';
+            
+            // Show typing indicator
+            showTypingIndicator();
+            
+            try {
+                // Get AI response
+                const response = await chatbot.getAIResponse(message);
+                hideTypingIndicator();
+                addMessage(response);
+            } catch (error) {
+                console.error('Error getting response:', error);
+                hideTypingIndicator();
+                addMessage("I'm sorry, I'm having trouble responding right now. Please try again.");
+            }
+        }
+        
+        function showAPIKeyModal() {
+            const apiKey = prompt('Enter your GroqCloud API Key (get free at https://console.groq.com/):');
+            if (apiKey && apiKey.trim()) {
+                chatbot.setAPIKey(apiKey.trim());
+                addMessage('✅ AI mode activated! I can now provide more intelligent responses.', false);
+                updateStatusIndicator(true);
+            }
+        }
+        
+        function updateStatusIndicator(isAI) {
+            const statusElement = document.querySelector('.ai-status');
+            if (statusElement) {
+                statusElement.textContent = isAI ? '🤖 AI Mode' : '💬 Basic Mode';
+                statusElement.style.color = isAI ? '#22c55e' : '#f59e0b';
+            }
+        }
+        
+        function sendQuickResponse(message) {
+            document.getElementById('chatInput').value = message;
+            sendMessage();
+        }
+        
+        // Event listeners
+        document.getElementById('chatInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+        
+        document.getElementById('chatInput').addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = this.scrollHeight + 'px';
+        });
+        
+        // Welcome message
+        setTimeout(() => {
+            addMessage("Hello! I'm your AI wellness assistant. How can I help you today?");
+        }, 1000);
+    </script>
+</body>
+</html>

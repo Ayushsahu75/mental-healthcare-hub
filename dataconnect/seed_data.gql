@@ -1,0 +1,116 @@
+mutation CreateSeedData @transaction @auth(level: NO_ACCESS) {
+  user_insertMany(
+    data: [
+      {
+        id: "67f7a9c4-2e7f-4c7a-b3f2-4a9e9b8d1b8a"
+        displayName: "Demo User 1"
+        email: "demouser1@example.com"
+        createdAt: "2024-04-26T12:00:00Z"
+      }
+      {
+        id: "9c8b3a2f-5e4d-4a6f-9a8b-7c6e4a2f5e4d"
+        displayName: "Demo User 2"
+        email: "demouser2@example.com"
+        createdAt: "2024-04-26T13:00:00Z"
+      }
+    ]
+  )
+  supportGroup_insertMany(
+    data: [
+      {
+        id: "a1b2c3d4-e5f6-4a7b-8c9d-0e1a2b3c4d5e"
+        name: "Depression Support Group"
+        description: "A supportive community for those dealing with depression."
+        createdAt: "2024-04-26T14:00:00Z"
+      }
+      {
+        id: "f9e8d7c6-b5a4-4c3d-9e2f-1a2b3c4d5e6f"
+        name: "Anxiety Relief Group"
+        description: "A safe space to share experiences and strategies for managing anxiety."
+        createdAt: "2024-04-26T15:00:00Z"
+      }
+    ]
+  )
+  groupMembership_insertMany(
+    data: [
+      {
+        userId: "67f7a9c4-2e7f-4c7a-b3f2-4a9e9b8d1b8a"
+        supportGroupId: "a1b2c3d4-e5f6-4a7b-8c9d-0e1a2b3c4d5e"
+        joinedAt: "2024-04-26T16:00:00Z"
+        role: "member"
+      }
+      {
+        userId: "9c8b3a2f-5e4d-4a6f-9a8b-7c6e4a2f5e4d"
+        supportGroupId: "f9e8d7c6-b5a4-4c3d-9e2f-1a2b3c4d5e6f"
+        joinedAt: "2024-04-26T17:00:00Z"
+        role: "moderator"
+      }
+    ]
+  )
+  groupPost_insertMany(
+    data: [
+      {
+        supportGroupId: "a1b2c3d4-e5f6-4a7b-8c9d-0e1a2b3c4d5e"
+        userId: "67f7a9c4-2e7f-4c7a-b3f2-4a9e9b8d1b8a"
+        content: "Welcome to the Depression Support Group! We're here for you."
+        createdAt: "2024-04-26T18:00:00Z"
+      }
+      {
+        supportGroupId: "f9e8d7c6-b5a4-4c3d-9e2f-1a2b3c4d5e6f"
+        userId: "9c8b3a2f-5e4d-4a6f-9a8b-7c6e4a2f5e4d"
+        content: "Share your anxiety management tips in the Anxiety Relief Group!"
+        createdAt: "2024-04-26T19:00:00Z"
+      }
+    ]
+  )
+  comment_insertMany(
+    data: [
+      {
+        groupPostId: "some-group-post-id-1" # Replace with a valid GroupPost ID
+        userId: "67f7a9c4-2e7f-4c7a-b3f2-4a9e9b8d1b8a"
+        content: "Thanks for creating this group!"
+        createdAt: "2024-04-26T20:00:00Z"
+      }
+      {
+        groupPostId: "some-group-post-id-2" # Replace with a valid GroupPost ID
+        userId: "9c8b3a2f-5e4d-4a6f-9a8b-7c6e4a2f5e4d"
+        content: "I'm glad to be part of this community."
+        createdAt: "2024-04-26T21:00:00Z"
+      }
+    ]
+  )
+  moodEntry_insertMany(
+    data: [
+      {
+        userId: "67f7a9c4-2e7f-4c7a-b3f2-4a9e9b8d1b8a"
+        date: "2024-04-25"
+        moodLevel: 3
+        briefNote: "Felt a bit down today."
+        createdAt: "2024-04-26T22:00:00Z"
+      }
+      {
+        userId: "9c8b3a2f-5e4d-4a6f-9a8b-7c6e4a2f5e4d"
+        date: "2024-04-26"
+        moodLevel: 4
+        briefNote: "Feeling more positive today."
+        createdAt: "2024-04-26T23:00:00Z"
+      }
+    ]
+  )
+  journalEntry_insertMany(
+    data: [
+      {
+        userId: "67f7a9c4-2e7f-4c7a-b3f2-4a9e9b8d1b8a"
+        title: "My Day"
+        content: "Today was a mixed bag of emotions."
+        createdAt: "2024-04-27T00:00:00Z"
+      }
+      {
+        userId: "9c8b3a2f-5e4d-4a6f-9a8b-7c6e4a2f5e4d"
+        title: "Gratitude Journal"
+        content: "I'm grateful for my friends and family."
+        createdAt: "2024-04-27T01:00:00Z"
+      }
+    ]
+  )
+}
