@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let isTyping = false;
     let userId = 'default_guest_user'; // Placeholder, will be updated by Firebase Auth
     let currentModel = 'llama-3.1-8b-instant'; // Default model
-    let apiBaseUrl = 'http://localhost:5000'; // Backend API URL
+    let apiBaseUrl = 'https://mental-healthcare-hub-1.onrender.com'; // Backend API URL
     let isAIMode = true; // AI mode enabled by default
     let isRecording = false; // Microphone recording state
     let recognition = null; // Speech recognition object
@@ -397,7 +397,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Check if it's a connection error
             if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
-                showNotification('Cannot connect to backend server. Make sure backend is running on http://localhost:5000', 'error');
+                showNotification('Cannot connect to backend server. Make sure backend is running on https://mental-healthcare-hub-1.onrender.com', 'error');
                 const fallbackResponse = generateBotResponse(userMessage);
                 addBotMessage(fallbackResponse);
                 logTranscriptToFirestore(userMessage, fallbackResponse); 
