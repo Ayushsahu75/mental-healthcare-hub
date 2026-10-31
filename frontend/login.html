@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Mental Wellness Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    
+</head>
+<body class="login-body">
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <img src="https://via.placeholder.com/60x60/4F46E5/FFFFFF?text=M" alt="Logo" class="login-logo">
+                <h1>Welcome Back</h1>
+                <p>Sign in to continue your wellness journey</p>
+            </div>
+            
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email or Student ID</label>
+                    <input type="text" id="email" name="email" placeholder="Enter your email or student ID" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+                
+                <div class="form-options">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="remember">
+                        <span class="checkmark"></span>
+                        Remember me
+                    </label>
+                    <a href="forgot-password.html" class="forgot-password">Forgot Password?</a>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-full">Sign In</button>
+            </form>
+            
+            <div class="login-divider">
+                <span>or</span>
+            </div>
+            
+            <div class="social-login">
+                <button class="social-btn google-btn">
+                    <img src="https://via.placeholder.com/20x20/FFFFFF/000000?text=G" alt="Google">
+                    Continue with Google
+                </button>
+                <button class="social-btn microsoft-btn">
+                    <img src="https://via.placeholder.com/20x20/FFFFFF/000000?text=M" alt="Microsoft">
+                    Continue with Facebook
+                </button>
+            </div>
+            
+            <div class="login-footer">
+                <p>Don't have an account? <a href="register.html" class="register-link">Sign up here</a></p>
+                
+            </div>
+        </div>
+        
+        <div class="login-info">
+            <h2>Your Mental Health Matters</h2>
+            <div class="info-cards">
+                <div class="info-card">
+                    <div class="info-icon">🔒</div>
+                    <h3>100% Confidential</h3>
+                    <p>Your data and conversations are completely private and secure</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">🎯</div>
+                    <h3>Evidence-Based</h3>
+                    <p>All resources and tools are based on proven psychological methods</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">🌟</div>
+                    <h3>Always Available</h3>
+                    <p>24/7 access to support tools and emergency resources</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+<script src="firebase-init.js"></script> 
+<script src="auth-guard.js"></script>
+<script src="login.js"></script>
+</body>
+</html>

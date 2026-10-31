@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PHQ-9 Depression Test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: Inter, sans-serif; background:#f5f7fb; margin:0 }
+    .test-container { max-width:900px; margin:40px auto; padding:40px }
+    .test-header { text-align:center; margin-bottom:40px }
+    .test-header h2 {
+      font-size:2.3rem;font-weight:800;
+      background:linear-gradient(135deg,#667eea,#764ba2);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent
+    }
+    .test-form { background:#fff;padding:40px;border-radius:20px;box-shadow:0 15px 40px rgba(0,0,0,.1) }
+    .question-item { margin-bottom:30px;border-bottom:1px solid #eee;padding-bottom:20px }
+    .question-text { font-weight:600;margin-bottom:12px }
+    .radio-group { display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px }
+
+    .radio-option {
+      display:flex;gap:10px;align-items:center;
+      padding:14px;border:2px solid #e5e7eb;border-radius:12px;
+      cursor:pointer;transition:.25s;background:#fff
+    }
+    .radio-option:hover { border-color:#6366f1;background:#eef2ff }
+
+    .radio-option.selected {
+      border-color:#6366f1;
+      background:linear-gradient(135deg,#eef2ff,#e0e7ff);
+      box-shadow:0 8px 20px rgba(99,102,241,.25)
+    }
+
+    .submit-section { text-align:center;margin-top:40px }
+    .submit-btn {
+      padding:14px 50px;font-size:1.1rem;border-radius:12px;
+      border:none;cursor:pointer;color:#fff;
+      background:linear-gradient(135deg,#667eea,#764ba2)
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="test-container">
+  <div class="test-header">
+    <h2>PHQ-9 Depression Screening</h2>
+    <p>Over the last 2 weeks, how often have you been bothered by the following problems?</p>
+  </div>
+
+  <!-- IMPORTANT: form empty rahega, JS bharega -->
+  <form id="phq9Form" class="test-form" novalidate></form>
+</div>
+
+<script src="phq9.js"></script>
+</body>
+</html>

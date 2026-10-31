@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Educational Videos - Mental Wellness Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="dashboard-body">
+  <header class="header">
+    <div class="container">
+      <div class="logo" onclick="window.location.href='index.html'">
+        <div class="logo-img">M</div>
+        <span class="logo-text">Mental Wellness Hub</span>
+      </div>
+      <div class="header-actions">
+        <button class="back-btn" onclick="history.back()">← Back</button>
+        <button class="btn btn-secondary btn-small" onclick="window.location.href='resources.html'">📚 Resources</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="dashboard-main">
+    <div class="container">
+      <section class="dashboard-welcome">
+        <div class="welcome-content">
+          <h1 class="welcome-title">🎥 Educational Video Library</h1>
+          <p class="welcome-subtitle">Expert-led videos on anxiety, depression, sleep, and academic stress in multiple languages</p>
+        </div>
+        <div class="welcome-stats">
+          <div class="stat-card"><div class="stat-value">45+</div><div class="stat-label">Videos</div></div>
+          <div class="stat-card"><div class="stat-value">5</div><div class="stat-label">Languages</div></div>
+        </div>
+      </section>
+
+      <div class="dashboard-grid">
+        <div class="card dashboard-card">
+          <div class="card-header">
+            <h3>📚 Anxiety & Stress</h3>
+            <p>Practical skills to manage anxiety and pressure</p>
+          </div>
+          <div class="resources-grid">
+            <div class="resource-item" onclick="play('breathing-basics')">
+              <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=200&h=120&fit=crop" alt="Breathing">
+              <div class="resource-content">
+                <h4>Breathing Basics for Anxiety</h4>
+                <p>Learn 4-7-8 and box breathing techniques</p>
+                <div class="resource-meta"><span>10 min</span><span>EN/HI</span></div>
+              </div>
+            </div>
+            <div class="resource-item" onclick="play('exam-stress')">
+              <img src="https://images.unsplash.com/photo-1513258496099-48168024aec0?w=200&h=120&fit=crop" alt="Exam stress">
+              <div class="resource-content">
+                <h4>Managing Exam Stress</h4>
+                <p>Step-by-step routine before and during exams</p>
+                <div class="resource-meta"><span>12 min</span><span>EN/TN</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card dashboard-card">
+          <div class="card-header">
+            <h3>💙 Depression & Mood</h3>
+            <p>Evidence-based psychoeducation</p>
+          </div>
+          <div class="resources-grid">
+            <div class="resource-item" onclick="play('behavioral-activation')">
+              <img src="https://images.unsplash.com/photo-1485217988980-11786ced9454?w=200&h=120&fit=crop" alt="BA">
+              <div class="resource-content">
+                <h4>Behavioral Activation</h4>
+                <p>Small actions that lift mood</p>
+                <div class="resource-meta"><span>14 min</span><span>EN/BN</span></div>
+              </div>
+            </div>
+            <div class="resource-item" onclick="play('sleep-hygiene')">
+              <img src="https://images.unsplash.com/photo-1529694157871-49e4affd99ee?w=200&h=120&fit=crop" alt="Sleep">
+              <div class="resource-content">
+                <h4>Sleep Hygiene for Students</h4>
+                <p>Reset your body clock and improve sleep</p>
+                <div class="resource-meta"><span>11 min</span><span>EN/TE</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center;margin-top:var(--spacing-xl)">
+        <button class="btn btn-primary" onclick="window.location.href='chatbot.html'">Ask AI for a video suggestion</button>
+      </div>
+    </div>
+  </main>
+
+  <nav class="bottom-nav">
+    <a href="dashboard.html" class="nav-item">
+      <div class="nav-icon">🏠</div>
+      <span>Home</span>
+    </a>
+    <a href="chatbot.html" class="nav-item">
+      <div class="nav-icon">💬</div>
+      <span>Chat</span>
+    </a>
+    <a href="breathing-exercises.html" class="nav-item">
+      <div class="nav-icon">🫁</div>
+      <span>Breath</span>
+    </a>
+    <a href="resources.html" class="nav-item">
+      <div class="nav-icon">🔍</div>
+      <span>Discover</span>
+    </a>
+    <a href="sounds.html" class="nav-item">
+      <div class="nav-icon">🎵</div>
+      <span>Sounds</span>
+    </a>
+  </nav>
+
+  <script src="auth-guard.js"></script>
+  <script>
+    function play(id){
+      alert('Opening video: '+id+'\n(Embed YouTube/Vimeo player in production)');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered EEG Mental Health Assessment</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dashboard-body">
+    <header class="header">
+        <div class="container" style="display: flex; align-items: center;">
+            <button class="btn btn-outline btn-small" onclick="window.history.back()" style="margin-right: 20px;">← Back</button>
+            <div class="logo" onclick="window.location.href='index.html'" style="cursor: pointer;">
+                <div class="logo-img">M</div>
+                <span class="logo-text">Mental Wellness Hub</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="eeg-module-container">
+        <div class="eeg-content">
+            <header class="eeg-header">
+                <h1 class="eeg-title">AI-Powered Mental Health Assessment</h1>
+                <p class="eeg-subtitle">Revolutionizing mental wellness through real-time brainwave analysis (EEG) and advanced machine learning models.</p>
+            </header>
+
+            <section class="eeg-section">
+                <h2 class="eeg-section-title">Core Technologies</h2>
+                <div class="eeg-grid">
+                    <div class="eeg-card">
+                        <h3>Sensor Hardware</h3>
+                        <ul class="eeg-list">
+                            <li>Multi-Channel Biosensor Headband</li>
+                            <li>Real-time Bluetooth Low Energy (BLE)</li>
+                            <li>Active Noise-to-Signal Cancellation</li>
+                            <li>Non-invasive Gold Plated Electrodes</li>
+                        </ul>
+                    </div>
+                    <div class="eeg-card">
+                        <h3>AI Diagnostics</h3>
+                        <ul class="eeg-list">
+                            <li>Convolutional Neural Networks (CNN)</li>
+                            <li>Fast Fourier Transform (FFT) Analytics</li>
+                            <li>Real-time Pattern Recognition</li>
+                            <li>Predictive Mood Trend Algorithms</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="eeg-section">
+                <div class="demo-prediction">
+                    <h3>Live Assessment Simulation</h3>
+                    <div class="demo-metrics">
+                        <div class="metric-circle active">
+                            <span class="metric-val">84%</span>
+                            <span class="metric-label">Relaxation</span>
+                        </div>
+                        <div class="metric-circle">
+                            <span class="metric-val">12%</span>
+                            <span class="metric-label">Stress</span>
+                        </div>
+                        <div class="metric-circle">
+                            <span class="metric-val">91%</span>
+                            <span class="metric-label">Focus</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" style="margin-top: 4rem;" onclick="simulateAssessment()">Relaunch Scan</button>
+                </div>
+            </section>
+
+            <section class="eeg-section">
+                <h2 class="eeg-section-title">Operational Workflow</h2>
+                <div class="workflow-step">
+                    <div class="step-num">01</div>
+                    <div class="step-content">
+                        <h4>Signal Acquisition</h4>
+                        <p>Electrical impulses from the cerebral cortex are captured in micro-volts using high-resolution biosensors across Alpha, Beta, Theta, and Delta bands.</p>
+                    </div>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-num">02</div>
+                    <div class="step-content">
+                        <h4>Neural Processing</h4>
+                        <p>Raw EEG data is filtered and processed using FFT (Fast Fourier Transform) to extract specific frequency features for classification.</p>
+                    </div>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-num">03</div>
+                    <div class="step-content">
+                        <h4>AI Inference</h4>
+                        <p>Our pre-trained Machine Learning model analyzes the patterns to provide objective scores for stress, focus, and overall mental state.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="eeg-section">
+                <h2 class="eeg-section-title">Key Applications</h2>
+                <div class="eeg-grid">
+                    <div class="eeg-card">
+                        <h3>Clinical Support</h3>
+                        <p>Providing practitioners with objective data to complement traditional self-report methods.</p>
+                    </div>
+                    <div class="eeg-card">
+                        <h3>Workplace Focus</h3>
+                        <p>Optimizing productivity by monitoring cognitive load and suggesting timely breaks.</p>
+                    </div>
+                    <div class="eeg-card">
+                        <h3>Academic Wellness</h3>
+                        <p>Identifying student burnout early through objective stress markers during exams.</p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="disclaimer-box">
+                <strong>Medical Disclaimer:</strong> This platform is an educational demonstration tool. It is not intended for medical diagnosis or treatment. Always consult a professional for mental health concerns.
+            </div>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="dashboard.html" class="nav-item">
+            <div class="nav-icon">🏠</div>
+            <span>Home</span>
+        </a>
+        <a href="chatbot.html" class="nav-item">
+            <div class="nav-icon">💬</div>
+            <span>Chat</span>
+        </a>
+        <a href="resources.html" class="nav-item">
+            <div class="nav-icon">🔍</div>
+            <span>Discover</span>
+        </a>
+    </nav>
+</body>
+</html>

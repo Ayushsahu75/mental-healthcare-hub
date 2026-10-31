@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Wellness Hub - Your Digital Mental Health Companion</title>
+    <meta name="description" content="Transform your mental wellbeing with AI-powered support, professional counseling, and evidence-based wellness tools designed for modern life.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%2338bdf8'/><text x='50' y='70' text-anchor='middle' font-size='60' font-weight='800' fill='white'>M</text></svg">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="firebase-init.js"></script>
+</head>
+<body class="index-body">
+    <!-- Page Loader -->
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-content">
+            <div class="loader-logo">M</div>
+            <div class="loader-bar"><div class="loader-progress"></div></div>
+            <p class="loader-text">Loading your wellness experience...</p>
+        </div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor" id="customCursor"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <header class="header" id="header">
+        <div class="container">
+            <div class="logo" onclick="window.location.href='index.html'">
+                <div class="logo-img">M</div>
+                <span class="logo-text" data-i18n="brand">Mental Wellness Hub</span>
+            </div>
+            <!-- Hamburger Menu -->
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+            <nav class="nav" id="mainNav">
+                <a href="dashboard.html" class="nav-link">
+                    <span data-i18n="nav.dashboard">Dashboard</span>
+                </a>
+                <a href="chatbot.html" class="nav-link">
+                    <span data-i18n="nav.aiSupport">AI Support</span>
+                </a>
+                <a href="resources.html" class="nav-link">
+                    <span data-i18n="nav.resources">Resources</span>
+                </a>
+                <a href="eeg-model.html" class="nav-link">
+                    <span>EEG Demo</span>
+                </a>
+                <a href="booking.html" class="nav-link">
+                    <span data-i18n="nav.bookSession">Book Session</span>
+                </a>
+                <div class="language-selector">
+                    <select id="languageSelect" class="language-dropdown">
+                        <option value="en">English</option>
+                        <option value="hi">Hindi</option>
+                        <option value="ta">Tamil</option>
+                        <option value="te">Telugu</option>
+                        <option value="bn">Bengali</option>
+                    </select>
+                </div>
+                <a href="login.html" class="btn btn-primary btn-small magnetic-btn">
+                    <span data-i18n="nav.getStarted">Get Started</span>
+                </a>
+            </nav>
+            <div class="mobile-overlay" id="mobileOverlay"></div>
+        </div>
+    </header>
+
+    <section class="hero" id="heroSection">
+        <canvas class="hero-particles" id="heroParticles"></canvas>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title" id="heroTitle" data-i18n="hero.title">Transform Your Mental Wellness Journey</h1>
+                <p class="hero-subtitle" id="heroSubtitle" data-i18n="hero.subtitle">Discover AI-powered support, professional counseling, and evidence-based wellness tools designed to help you thrive in every aspect of life.</p>
+                <div class="hero-buttons" id="heroButtons">
+                    <a href="chatbot.html" class="btn btn-primary btn-large magnetic-btn">
+                        <span data-i18n="hero.startAi">Start AI Support</span>
+                    </a>
+                    <a href="dashboard.html" class="btn btn-secondary btn-large magnetic-btn">
+                        <span data-i18n="hero.exploreDashboard">Explore Dashboard</span>
+                    </a>
+                </div>
+                <div class="hero-stats" id="heroStats">
+                    <div class="hero-stat">
+                        <span class="hero-stat-number" data-count="10000" data-suffix="k+">0</span>
+                        <span class="hero-stat-label" data-i18n="stats.students">Students Helped</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-number" data-count="24" data-suffix="/7">0</span>
+                        <span class="hero-stat-label" data-i18n="stats.ai">AI Support</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-number" data-count="95" data-suffix="%">0</span>
+                        <span class="hero-stat-label" data-i18n="stats.satisfaction">Satisfaction Rate</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image" id="heroImage" data-speed="0.3">
+                <div id="three-container"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="featuresSection">
+        <div class="container">
+            <h2 class="section-title" data-i18n="features.title">Comprehensive Mental Health Support</h2>
+            <p class="features-subtitle" data-i18n="features.subtitle">Experience evidence-based mental health tools designed by professionals to support your wellbeing journey.</p>
+            <div class="features-grid">
+                <div class="feature-card" data-tilt>
+                    <div class="feature-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 1 4 4v1a3 3 0 0 1 3 3v1a2 2 0 0 1-2 2h-1l-1 7H9l-1-7H7a2 2 0 0 1-2-2v-1a3 3 0 0 1 3-3V6a4 4 0 0 1 4-4z"/><circle cx="12" cy="7" r="1.5"/></svg></div>
+                    <h3 data-i18n="features.ai.title">AI Wellness Assistant</h3>
+                    <p data-i18n="features.ai.body">Get instant, personalized support from our AI companion trained on evidence-based therapeutic approaches.</p>
+                </div>
+                <div class="feature-card" data-tilt>
+                    <div class="feature-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-3-3.87"/><path d="M4 21v-2a4 4 0 0 1 3-3.87"/><circle cx="12" cy="7" r="4"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M8 3.13a4 4 0 0 0 0 7.75"/></svg></div>
+                    <h3 data-i18n="features.counseling.title">Professional Counseling</h3>
+                    <p data-i18n="features.counseling.body">Connect with licensed mental health professionals through secure, confidential video sessions.</p>
+                </div>
+                <div class="feature-card" data-tilt>
+                    <div class="feature-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/><path d="M8 12s1.5-2 4-2 4 2 4 2"/></svg></div>
+                    <h3 data-i18n="features.mindfulness.title">Mindfulness Tools</h3>
+                    <p data-i18n="features.mindfulness.body">Access guided breathing exercises, meditation, and relaxation techniques for immediate stress relief.</p>
+                </div>
+                <div class="feature-card" data-tilt>
+                    <div class="feature-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+                    <h3 data-i18n="features.mood.title">Mood Tracking</h3>
+                    <p data-i18n="features.mood.body">Monitor your emotional wellbeing with intelligent mood tracking and personalized insights.</p>
+                </div>
+                <div class="feature-card" data-tilt>
+                    <div class="feature-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+                    <h3 data-i18n="features.community.title">Community Support</h3>
+                    <p data-i18n="features.community.body">Join a supportive community of peers navigating similar mental health challenges.</p>
+                </div>
+                <div class="feature-card" data-tilt>
+                    <div class="feature-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1"/></svg></div>
+                    <h3 data-i18n="features.privacy.title">Complete Privacy</h3>
+                    <p data-i18n="features.privacy.body">Your mental health journey is completely private with enterprise-grade security and confidentiality.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="quick-access" id="quickAccessSection">
+        <div class="container">
+            <h2 class="quick-access-title" data-i18n="quick.title">Start Your Wellness Journey Today</h2>
+            <p class="quick-access-subtitle" data-i18n="quick.subtitle">Choose the support that feels right for you - whether it's immediate relief or long-term care.</p>
+            <div class="quick-access-grid">
+                <a href="chatbot.html" class="quick-access-card">
+                    <div class="quick-icon">💬</div>
+                    <span data-i18n="quick.ai">AI Support Chat</span>
+                </a>
+                <a href="breathing-exercises.html" class="quick-access-card">
+                    <div class="quick-icon">🌬️</div>
+                    <span data-i18n="quick.breathing">Breathing Exercises</span>
+                </a>
+                <a href="mood-tracker.html" class="quick-access-card">
+                    <div class="quick-icon">📊</div>
+                    <span data-i18n="quick.mood">Track Your Mood</span>
+                </a>
+                <a href="booking.html" class="quick-access-card">
+                    <div class="quick-icon">👨‍⚕️</div>
+                    <span data-i18n="quick.book">Book Professional</span>
+                </a>
+                <a href="sounds.html" class="quick-access-card">
+                    <div class="quick-icon">🎵</div>
+                    <span data-i18n="quick.sounds">Relaxation Sounds</span>
+                </a>
+                <a href="community.html" class="quick-access-card">
+                    <div class="quick-icon">🤝</div>
+                    <span data-i18n="quick.community">Join Community</span>
+                </a>
+            </div>
+            <div style="text-align: center; margin-top: var(--spacing-2xl);">
+                <a href="dashboard.html" class="btn btn-accent btn-large magnetic-btn">
+                    <span data-i18n="quick.cta">Get Started Now</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 data-i18n="footer.brandTitle">Mental Wellness Hub</h4>
+                    <p data-i18n="footer.brandBody">Empowering individuals with AI-driven mental health support, professional counseling, and evidence-based wellness tools for a healthier, more resilient life.</p>
+                    <div style="margin-top: var(--spacing-lg);">
+                        <a href="chatbot.html" class="btn btn-secondary btn-small" data-i18n="footer.tryAi">Try AI Support</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="footer.emergencyTitle">Emergency Support</h4>
+                    <p><strong>Crisis Helpline:</strong> 988</p>
+                    <p><strong>National Helpline:</strong> 1-800-599-0019</p>
+                    <p><strong>Text Support:</strong> Text HOME to 741741</p>
+                    <p style="font-size: 0.875rem; color: rgba(255,255,255,0.7);" data-i18n="footer.emergencyBody">Available 24/7 - You are not alone</p>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="footer.quickAccessTitle">Quick Access</h4>
+                    <a href="dashboard.html" data-i18n="nav.dashboard">Dashboard</a>
+                    <a href="booking.html" data-i18n="nav.bookSession">Book Session</a>
+                    <a href="resources.html" data-i18n="nav.resources">Resources</a>
+                    <a href="community.html" data-i18n="footer.community">Community</a>
+                    <a href="mood-tracker.html" data-i18n="footer.mood">Mood Tracker</a>
+                </div>
+                <div class="footer-section">
+                    <h4 data-i18n="footer.aboutTitle">About</h4>
+                    <a href="#" data-i18n="footer.privacyPolicy">Privacy Policy</a>
+                    <a href="#" data-i18n="footer.terms">Terms of Service</a>
+                    <a href="#" data-i18n="footer.accessibility">Accessibility</a>
+                    <a href="#" data-i18n="footer.contact">Contact Us</a>
+                    <a href="#" data-i18n="footer.providers">Healthcare Providers</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-i18n="footer.bottom">&copy; 2024 Mental Wellness Hub. All rights reserved. | Designed for better mental health.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="index.js"></script>
+</body>
+</html>
