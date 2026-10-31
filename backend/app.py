@@ -1,7 +1,7 @@
 ﻿#!/usr/bin/env python3
 
 import os
-from flask import Flask, jsonify, request, send_from_directory
+from flask import Flask, Response, jsonify, request, send_from_directory
 from flask_cors import CORS
 from dotenv import load_dotenv
 from groq import Groq
@@ -33,6 +33,21 @@ def site_files(filename):
 @app.route('/data/<path:filename>')
 def serve_data(filename):
     return send_from_directory(DATA_DIRECTORY, filename)
+
+@app.route('/api/firebase-config.js')
+def firebase_config():
+    firebase_config = {
+        'apiKey': os.getenv('FIREBASE_API_KEY', ''),
+        'authDomain': os.getenv('FIREBASE_AUTH_DOMAIN', ''),
+        'projectId': os.getenv('FIREBASE_PROJECT_ID', ''),
+        'storageBucket': os.getenv('FIREBASE_STORAGE_BUCKET', ''),
+        'messagingSenderId': os.getenv('FIREBASE_MESSAGING_SENDER_ID', ''),
+        'appId': os.getenv('FIREBASE_APP_ID', ''),
+        'measurementId': os.getenv('FIREBASE_MEASUREMENT_ID', ''),
+    }
+    import json
+    script = "window.firebaseConfig = " + json.dumps(firebase_config) + ";"
+    return Response(script, mimetype='application/javascript')
 
 @app.route('/api/health')
 def health():
