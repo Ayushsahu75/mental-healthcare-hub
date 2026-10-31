@@ -15,7 +15,12 @@ DATA_DIRECTORY = os.path.join(os.path.dirname(__file__), 'data')
 FRONTEND_DIRECTORY = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'frontend'))
 DEFAULT_MODEL = os.getenv('GROQ_MODEL', 'llama-3.1-8b-instant')
 api_key = os.getenv('GROQ_API_KEY')
-groq_client = Groq(api_key=api_key) if api_key else None
+groq_client = None
+if api_key:
+    try:
+        groq_client = Groq(api_key=api_key)
+    except Exception as error:
+        app.logger.error('Groq client could not be initialized: %s', error)
 conversations = {}
 
 @app.route('/')
